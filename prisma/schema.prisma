@@ -13,6 +13,7 @@ datasource db {
 
 model User {
   id                Int       @id @default(autoincrement()) @db.UnsignedInt
+  email             String
   hashedPassword    String
   clientToken       String
   clientTokenExpiry DateTime
@@ -22,11 +23,80 @@ model User {
 }
 
 model Judge {
-  id         Int       @id @default(autoincrement()) @db.UnsignedInt
-  email      String
-  code       String?
-  codeExpiry DateTime?
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime? @updatedAt
+  id           Int            @id @default(autoincrement()) @db.UnsignedInt
+  name         String
+  email        String
+  code         String?
+  codeExpiry   DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime?      @updatedAt
+  deletedAt    DateTime?
+  SessionJudge SessionJudge[]
+}
+
+model Competition {
+  id         Int          @id @default(autoincrement()) @db.UnsignedInt
+  name       String
+  year       Int
+  sessions   Session[]
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime?    @updatedAt
   deletedAt  DateTime?
+  Competitor Competitor[]
+}
+
+model Session {
+  id            Int            @id @default(autoincrement()) @db.UnsignedInt
+  name          String
+  date          DateTime
+  scoringFormat ScoringFormat  @default(AVERAGE)
+  competitionId Int
+  competition   Competition    @relation(fields: [competitionId], references: [id])
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime?      @updatedAt
+  deletedAt     DateTime?
+  SessionJudge  SessionJudge[]
+  Competitor    Competitor[]
+
+  @@index([competitionId])
+}
+
+model SessionJudge {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  session   Session   @relation(fields: [sessionId], references: [id])
+  sessionId Int
+  judge     Judge     @relation(fields: [judgeId], references: [id])
+  judgeId   Int
+  position  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  deletedAt DateTime?
+
+  @@index([sessionId])
+  @@index([judgeId])
+}
+
+model Competitor {
+  id             Int         @id @default(autoincrement()) @db.UnsignedInt
+  uniqueId       String
+  session        Session     @relation(fields: [sessionId], references: [id])
+  sessionId      Int
+  competition    Competition @relation(fields: [competitionId], references: [id])
+  competitionId  Int
+  sequenceNumber Int
+  eventName      String
+  judgesScores   Json?
+  penalties      Int?
+  finalScore     Int?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime?   @updatedAt
+  deletedAt      DateTime?
+
+  @@index([sessionId])
+  @@index([competitionId])
+}
+
+enum ScoringFormat {
+  AVERAGE
+  RHYTHMIC_GYMNASTICS_FIG_2022_2024
 }
