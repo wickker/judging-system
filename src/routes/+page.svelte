@@ -1,9 +1,4 @@
 <script lang="ts">
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<div>Hello</div>
+<div class="p-5 text-2xl">{`(:`}</div>
