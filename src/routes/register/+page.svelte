@@ -5,7 +5,6 @@
 	export let form: ActionData
 
 	$: console.log(form)
-  // $: console.log(form?.error)
 </script>
 
 <h1>Register</h1>
