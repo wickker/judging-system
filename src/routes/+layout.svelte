@@ -7,6 +7,6 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<div>
+<div class="mx-auto h-screen w-full max-w-lg bg-neutral-50">
 	<slot />
 </div>

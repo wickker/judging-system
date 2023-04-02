@@ -7,7 +7,7 @@
 	$: console.log('sign up form : ', form)
 </script>
 
-<h1>Register</h1>
+<!-- <h1>Register</h1>
 
 <form method="POST" use:enhance>
 	<div>
@@ -20,9 +20,5 @@
 		<input name="password" type="password" required />
 	</div>
 
-	<!-- {#if form?.user}
-    <p class="error">Username is taken.</p>
-  {/if} -->
-
 	<button type="submit">Register</button>
-</form>
+</form> -->
