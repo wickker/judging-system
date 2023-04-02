@@ -31,13 +31,13 @@ const register: Action = async ({ request }) => {
 	await db.user.create({
 		data: {
 			email: res.data.email,
-			hashedPassword: bcrypt.hashSync(res.data.password, 11),
+			hashedPassword: await bcrypt.hash(res.data.password, 11),
 			clientToken: uuidv4(),
 			clientTokenExpiry: DateTime.local().plus({ days: 1 }).toJSDate(),
 		},
 	})
 
-	throw redirect(303, ROUTES.LOGIN_ADMIN)
+	throw redirect(302, ROUTES.LOGIN_ADMIN)
 }
 
-export const actions = { register }
+export const actions = { default: register }
