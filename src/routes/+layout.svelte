@@ -3,8 +3,7 @@
 </script>
 
 <svelte:head>
-	<!-- TODO: Change this -->
-	<meta name="description" content="Svelte demo app" />
+	<meta name="description" content="Judging for performance sports simplified!" />
 	<script src="https://accounts.google.com/gsi/client" async defer></script>
 </svelte:head>
 

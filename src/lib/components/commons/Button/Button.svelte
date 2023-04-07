@@ -2,6 +2,7 @@
 	export let color: 'indigo' | 'crimson' = 'crimson'
 	export let type: 'bordered' | 'filled' = 'filled'
 	export let isBlock = false
+  export let buttonType = 'button'
 
 	function getColors() {
 		if (type === 'bordered' && color === 'crimson') {
@@ -19,6 +20,7 @@
 	on:click
 	class="flex h-12 max-w-full flex-row items-center justify-center truncate rounded border-2 px-6 py-3 text-lg text-white transition-transform active:scale-90 {getColors()}"
 	class:w-full={isBlock}
+  type={buttonType}
 >
 	<slot />
 </button>
