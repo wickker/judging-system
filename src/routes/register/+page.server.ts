@@ -18,12 +18,12 @@ const register: Action = async ({ request }) => {
 		return fail(400, { errors } as FormErrorResp)
 	}
 
-  const user = await userDto.findByEmail(res.data.email)
+	const user = await userDto.findByEmail(res.data.email)
 	if (user) {
 		return fail(400, { errors: { email: ['User already exists'] } } as FormErrorResp)
 	}
 
-  await userDto.create(res.data.email, res.data.password)
+	await userDto.create(res.data.email, res.data.password)
 
 	throw redirect(302, ROUTES.LOGIN_ADMIN)
 }

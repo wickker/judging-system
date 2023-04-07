@@ -15,9 +15,9 @@
 		}
 	}
 
-  onMount(() => {
-    emailRef?.focus()
-  })
+	onMount(() => {
+		emailRef?.focus()
+	})
 </script>
 
 <form method="POST" use:enhance>

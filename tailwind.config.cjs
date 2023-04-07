@@ -5,10 +5,10 @@ export default {
 		extend: {
 			colors: {
 				'dark-indigo': '#19191A',
-				'crimson': '#E43D2A',
-				'gray': '#6E7681',
-				'maroon': '#64251D',
-			}
+				crimson: '#E43D2A',
+				gray: '#6E7681',
+				maroon: '#64251D',
+			},
 		},
 	},
 	plugins: [],

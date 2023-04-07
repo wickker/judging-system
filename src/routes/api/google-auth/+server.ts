@@ -38,9 +38,9 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 		throw redirect(302, ROUTES.LOGIN_ADMIN)
 	}
 
-  const user = await userDto.upsertByEmail(credRes.data.email)
+	const user = await userDto.upsertByEmail(credRes.data.email)
 
-  cookies.set(COOKIES.ADMIN, user.clientToken, COOKIE_CONFIGS.ADMIN)
+	cookies.set(COOKIES.ADMIN, user.clientToken, COOKIE_CONFIGS.ADMIN)
 
 	throw redirect(302, ROUTES.SESSIONS)
 }

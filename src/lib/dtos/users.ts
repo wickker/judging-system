@@ -25,28 +25,29 @@ const useUserDto = (db: PrismaClient) => {
 				clientToken: uuidv4(),
 				clientTokenExpiry: DateTime.local().plus({ days: 1 }).toJSDate(),
 			},
-      create: {
-        clientToken: uuidv4(),
+			create: {
+				clientToken: uuidv4(),
 				clientTokenExpiry: DateTime.local().plus({ days: 1 }).toJSDate(),
-        email,
-        hashedPassword: await bcrypt.hash("hello123", 11), // TODO: Change to random seed
-      }
+				email,
+				hashedPassword: await bcrypt.hash('hello123', 11), // TODO: Change to random seed
+			},
 		})
 
-    const create = async (email: string, password: string) => await db.user.create({
-      data: {
-        email,
-        hashedPassword: await bcrypt.hash(password, 11),
-        clientToken: uuidv4(),
-        clientTokenExpiry: DateTime.local().plus({ days: 1 }).toJSDate(),
-      },
-    })
+	const create = async (email: string, password: string) =>
+		await db.user.create({
+			data: {
+				email,
+				hashedPassword: await bcrypt.hash(password, 11),
+				clientToken: uuidv4(),
+				clientTokenExpiry: DateTime.local().plus({ days: 1 }).toJSDate(),
+			},
+		})
 
 	return {
 		findByEmail,
 		updateClientTokenAndExpiry,
-    upsertByEmail,
-    create,
+		upsertByEmail,
+		create,
 	}
 }
 

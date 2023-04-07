@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { goto } from '$app/navigation'
+	import { goto } from '$app/navigation'
 	import Logo from '$lib/assets/logo.svg'
 	import { Input, FormItem, Button } from '$lib/components/commons'
-  import { ROUTES } from '$lib/utils/constants/routes'
+	import { ROUTES } from '$lib/utils/constants/routes'
 </script>
 
 <div class="relative flex h-full flex-row items-center justify-center bg-dark-indigo">

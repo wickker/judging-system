@@ -20,7 +20,7 @@ const loginAdmin: Action = async ({ request, cookies }) => {
 		return fail(400, { errors } as FormErrorResp)
 	}
 
-  const user = await userDto.findByEmail(res.data.email)
+	const user = await userDto.findByEmail(res.data.email)
 	const isPasswordMatch = await bcrypt.compare(res.data.password, user?.hashedPassword || '')
 
 	if (!user || !isPasswordMatch) {
@@ -29,9 +29,9 @@ const loginAdmin: Action = async ({ request, cookies }) => {
 
 	const authenticatedUser = await userDto.updateClientTokenAndExpiry(user.id)
 
-  cookies.set(COOKIES.ADMIN, authenticatedUser.clientToken, COOKIE_CONFIGS.ADMIN)
+	cookies.set(COOKIES.ADMIN, authenticatedUser.clientToken, COOKIE_CONFIGS.ADMIN)
 
-  throw redirect(302, ROUTES.SESSIONS)
+	throw redirect(302, ROUTES.SESSIONS)
 }
 
 export const actions = { default: loginAdmin }

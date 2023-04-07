@@ -1,7 +1,7 @@
 import winston from 'winston'
 
 const logger = winston.createLogger({
-  format: winston.format.json(),
+	format: winston.format.json(),
 })
 
 export default logger
