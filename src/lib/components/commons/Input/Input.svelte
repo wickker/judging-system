@@ -4,6 +4,7 @@
 	export let hasError = false
 	export let placeholder = ''
 	export let name = ''
+	export let ref: HTMLInputElement | undefined = undefined
 </script>
 
 <input
@@ -17,4 +18,5 @@
 	{name}
 	on:input
 	autocomplete="on"
+	bind:this={ref}
 />
