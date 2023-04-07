@@ -1,6 +1,6 @@
+import { z } from 'zod'
 import { ZOD_ERROR_MESSAGES } from '$lib/utils/constants/errors'
 import { REGEX } from '$lib/utils/constants/regex'
-import { z } from 'zod'
 
 // Requests
 export const UserRegistrationFormSchema = z.object({

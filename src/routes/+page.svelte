@@ -9,7 +9,6 @@
 		google.accounts.id.initialize({
 			client_id: '301604255242-geljs46di82rvv80uv2qvg0marl66to1.apps.googleusercontent.com',
 			ux_mode: 'redirect',
-			// context: 'use',
 			login_uri: 'http://localhost:5173/api/google-auth',
 		})
 		google.accounts.id.renderButton(loginElement, {
@@ -22,8 +21,6 @@
 			logo_alignment: 'left',
 		})
 	})
-
-  $: console.log(import.meta.env.MODE)
 </script>
 
 <div class="relative flex h-full flex-row items-center justify-center bg-dark-indigo">
@@ -40,6 +37,6 @@
 		<div />
 
 		<!-- <div class="g_id_signin" bind:this={loginElement} /> -->
-		<div id="buttonDiv" bind:this={loginElement} />
+		<div bind:this={loginElement} />
 	</div>
 </div>
