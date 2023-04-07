@@ -12,6 +12,6 @@
 		<Button isBlock on:click={() => goto(ROUTES.LOGIN_ADMIN)}>Sign in (as Administrator)</Button>
 		<Button isBlock>Sign in (as Judge)</Button>
 		<div />
-		<Button isBlock color="indigo">Sign up</Button>
+		<Button isBlock color="indigo" on:click={() => goto(ROUTES.REGISTER)}>Sign up</Button>
 	</div>
 </div>

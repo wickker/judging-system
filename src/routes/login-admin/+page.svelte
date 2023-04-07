@@ -1,10 +1,12 @@
 <script lang="ts">
-	import Logo from '$lib/assets/logo.svg'
 	import { GoogleLogin, SignInForm, PageTwoTone } from '$lib/components/commons'
 	import type { ActionData } from './$types'
 	import type { FormErrorResp } from '$lib/types/commons'
 
 	export let form: ActionData | FormErrorResp = null
+
+	// TODO: Handle case { message: 'Invalid credentials' } with notifications
+	$: console.log('form : ', form)
 </script>
 
 <!-- <br />
@@ -17,7 +19,7 @@
 	description="Sign in as an administrator to view and manage all your competitions and sessions."
 >
 	<div class="px-5 py-8">
-		<SignInForm bind:form />
+		<SignInForm bind:form buttonText="Sign in" showPasswordHelper />
 	</div>
 
 	<div class="bg-neutral-100 px-5 py-8">

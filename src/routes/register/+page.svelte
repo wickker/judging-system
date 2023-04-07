@@ -1,24 +1,20 @@
 <script lang="ts">
 	import type { ActionData } from './$types'
-	import { enhance } from '$app/forms'
+	import { SignInForm, PageTwoTone, GoogleLogin } from '$lib/components/commons'
+	import type { FormErrorResp } from '$lib/types/commons'
 
-	export let form: ActionData
-
-	$: console.log('sign up form : ', form)
+	export let form: ActionData | FormErrorResp = null
 </script>
 
-<!-- <h1>Register</h1>
-
-<form method="POST" use:enhance>
-	<div>
-		<label for="email">Username</label>
-		<input name="email" type="text" required />
+<PageTwoTone
+	title="Sign Up"
+	description="Sign up for an administrator account to view and manage all your competitions and sessions."
+>
+	<div class="px-5 py-8">
+		<SignInForm bind:form buttonText="Sign up" />
 	</div>
 
-	<div>
-		<label for="password">Password</label>
-		<input name="password" type="password" required />
+	<div class="bg-neutral-100 px-5 py-8">
+		<GoogleLogin />
 	</div>
-
-	<button type="submit">Register</button>
-</form> -->
+</PageTwoTone>

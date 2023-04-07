@@ -6,6 +6,8 @@
 	import { Input, FormItem, Button } from '$lib/components/commons'
 
 	export let form: ActionData | FormErrorResp = null
+	export let buttonText = ''
+	export let showPasswordHelper = false
 
 	let emailRef: HTMLInputElement | undefined = undefined
 
@@ -30,6 +32,7 @@
 			bind:ref={emailRef}
 		/>
 	</FormItem>
+
 	<FormItem label="Password" slotName="password" errorMessage={form?.errors?.password[0] || ''}>
 		<Input
 			let:slotName
@@ -38,6 +41,11 @@
 			type="password"
 			on:input={() => resetError(slotName)}
 		/>
+		{#if showPasswordHelper}
+			<!-- TODO: Handle forgot password -->
+			<button class="text-sm text-blue-600" type="button">Forgot password?</button>
+		{/if}
 	</FormItem>
-	<Button isBlock type="submit">Sign in</Button>
+
+	<Button isBlock type="submit" color="indigo">{buttonText}</Button>
 </form>
