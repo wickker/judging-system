@@ -20,21 +20,21 @@ export const handle: Handle = async ({ event, resolve }) => {
 		})
 	}
 
-  const user = await userDto.findByClientToken(clientToken)
-  if (!user) {
-    throw error(400, {
+	const user = await userDto.findByClientToken(clientToken)
+	if (!user) {
+		throw error(400, {
 			message: 'Failed to authenticate user',
 		})
-  }
+	}
 
-  if (user.clientTokenExpiry.getTime() <= Date.now()) {
-    throw error(400, {
+	if (user.clientTokenExpiry.getTime() <= Date.now()) {
+		throw error(400, {
 			message: 'User session expired, please login again',
 		})
-  }
+	}
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (event.locals as any).user = user
-  
-  return await resolve(event)
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	;(event.locals as any).user = user
+
+	return await resolve(event)
 }

@@ -8,15 +8,15 @@ import type { User } from '@prisma/client'
 const userDto = useUserDto(db)
 
 export const GET: RequestHandler = async ({ cookies, locals }) => {
-  cookies.set(COOKIES.ADMIN, '', {
+	cookies.set(COOKIES.ADMIN, '', {
 		path: '/',
 		expires: new Date(0),
 	})
 
-  if ('user' in locals) {
-    console.log('this runs')
-    await userDto.expireClientToken((locals.user as User).email)
-  }
+	if ('user' in locals) {
+		console.log('this runs')
+		await userDto.expireClientToken((locals.user as User).email)
+	}
 
 	throw redirect(302, ROUTES.HOME)
 }

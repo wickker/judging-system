@@ -23,12 +23,13 @@ const useUserDto = (db: PrismaClient) => {
 			},
 		})
 
-	const expireClientToken = async (email: string) => await db.user.update({
-		where: { email },
-		data: {
-			clientTokenExpiry: DateTime.local().toJSDate(),
-		},
-	})
+	const expireClientToken = async (email: string) =>
+		await db.user.update({
+			where: { email },
+			data: {
+				clientTokenExpiry: DateTime.local().toJSDate(),
+			},
+		})
 
 	const upsertByEmail = async (email: string) =>
 		await db.user.upsert({
