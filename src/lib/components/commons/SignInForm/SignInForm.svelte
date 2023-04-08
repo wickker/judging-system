@@ -7,6 +7,7 @@
 
 	export let form: ActionData | FormErrorResp = null
 	export let buttonText = ''
+	export let buttonColor: 'crimson' | 'indigo' = 'crimson'
 	export let showPasswordHelper = false
 
 	let emailRef: HTMLInputElement | undefined = undefined
@@ -47,5 +48,5 @@
 		{/if}
 	</FormItem>
 
-	<Button isBlock type="submit" color="indigo">{buttonText}</Button>
+	<Button isBlock type="submit" color={buttonColor}>{buttonText}</Button>
 </form>

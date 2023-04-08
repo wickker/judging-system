@@ -9,6 +9,11 @@ const useUserDto = (db: PrismaClient) => {
 			where: { email, deletedAt: null },
 		})
 
+	const findByClientToken = async (clientToken: string) =>
+		await db.user.findFirst({
+			where: { clientToken, deletedAt: null },
+		})
+
 	const updateClientTokenAndExpiry = async (id: number) =>
 		await db.user.update({
 			where: { id },
@@ -17,6 +22,13 @@ const useUserDto = (db: PrismaClient) => {
 				clientTokenExpiry: DateTime.local().plus({ days: 1 }).toJSDate(),
 			},
 		})
+
+	const expireClientToken = async (email: string) => await db.user.update({
+		where: { email },
+		data: {
+			clientTokenExpiry: DateTime.local().toJSDate(),
+		},
+	})
 
 	const upsertByEmail = async (email: string) =>
 		await db.user.upsert({
@@ -45,9 +57,11 @@ const useUserDto = (db: PrismaClient) => {
 
 	return {
 		findByEmail,
+		findByClientToken,
 		updateClientTokenAndExpiry,
 		upsertByEmail,
 		create,
+		expireClientToken,
 	}
 }
 
