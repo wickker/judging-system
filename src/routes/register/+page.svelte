@@ -1,9 +1,10 @@
 <script lang="ts">
 	import type { ActionData } from './$types'
 	import { SignInForm, PageTwoTone, GoogleLogin } from '$lib/components/commons'
-	import type { FormErrorResp } from '$lib/types/commons'
+	import type { Form } from '$lib/types/commons'
+	import type { UserRegistrationForm } from '$lib/types/user'
 
-	export let form: ActionData | FormErrorResp = null
+	export let form: Form<UserRegistrationForm> = null
 </script>
 
 <PageTwoTone

@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { GoogleLogin, SignInForm, PageTwoTone } from '$lib/components/commons'
-	import type { ActionData } from './$types'
-	import type { FormErrorResp } from '$lib/types/commons'
+	import type { Form } from '$lib/types/commons'
+	import type { UserRegistrationForm } from '$lib/types/user'
 
-	export let form: ActionData | FormErrorResp = null
+	export let form: Form<UserRegistrationForm> = null
 
-	// TODO: Handle case { message: 'Invalid credentials' } with notifications
+	// TODO: Handle case { errorMessage: 'Invalid credentials' } with notifications
 	$: console.log('form : ', form)
 </script>
 

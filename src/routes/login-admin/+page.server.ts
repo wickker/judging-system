@@ -17,14 +17,14 @@ const loginAdmin: Action = async ({ request, cookies }) => {
 
 	if (!res.success) {
 		const errors = convertZodErrorsToFormErrorResp(res.error)
-		return fail(400, { errors } as FormErrorResp)
+		return fail(400, { errors } satisfies FormErrorResp)
 	}
 
 	const user = await userDto.findByEmail(res.data.email)
 	const isPasswordMatch = await bcrypt.compare(res.data.password, user?.hashedPassword || '')
 
 	if (!user || !isPasswordMatch) {
-		return fail(400, { message: 'Invalid credentials' })
+		return fail(400, { errorMessage: 'Invalid credentials' } satisfies FormErrorResp)
 	}
 
 	const authenticatedUser = await userDto.updateClientTokenAndExpiry(user.id)
