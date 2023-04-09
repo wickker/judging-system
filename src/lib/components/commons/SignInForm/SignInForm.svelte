@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { SvelteComponent, onMount } from 'svelte'
 	import { enhance } from '$app/forms'
 	import type { Form } from '$lib/types/commons'
-	import { Input, FormItem, Button } from '$lib/components/commons'
+	import { Input, FormItem, Button, FormLogic } from '$lib/components/commons'
 	import type { UserRegistrationForm } from '$lib/types/user'
 
 	export let form: Form<UserRegistrationForm> = null
@@ -10,18 +10,15 @@
 	export let buttonColor: 'crimson' | 'indigo' = 'crimson'
 	export let showPasswordHelper = false
 
+	let formLogic: SvelteComponent
 	let emailRef: HTMLInputElement | undefined = undefined
-
-	function resetError(keyName: string) {
-		if (form?.errors?.[keyName] && form.errors[keyName].length > 0) {
-			form.errors[keyName] = []
-		}
-	}
 
 	onMount(() => {
 		emailRef?.focus()
 	})
 </script>
+
+<FormLogic bind:form bind:this={formLogic} />
 
 <form method="POST" use:enhance>
 	<FormItem label="Email" slotName="email" errorMessage={form?.errors?.email?.[0] || ''}>
@@ -29,7 +26,7 @@
 			let:slotName
 			name={slotName}
 			slot="formItem"
-			on:input={() => resetError(slotName)}
+			on:input={() => formLogic.resetError(slotName)}
 			bind:ref={emailRef}
 		/>
 	</FormItem>
@@ -40,7 +37,7 @@
 			name={slotName}
 			slot="formItem"
 			type="password"
-			on:input={() => resetError(slotName)}
+			on:input={() => formLogic.resetError(slotName)}
 		/>
 		{#if showPasswordHelper}
 			<!-- TODO: Handle forgot password -->
