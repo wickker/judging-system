@@ -9,6 +9,8 @@
 	onMount(async function () {
 		if ('google' in window) {
 			const google = window.google as any
+			const buttonWidth = 320 // max button width is 400
+
 			google.accounts.id.initialize({
 				client_id: PUBLIC_VITE_GOOGLE_CLIENT_ID,
 				ux_mode: 'redirect',
@@ -16,11 +18,11 @@
 			})
 
 			google.accounts.id.renderButton(loginRef, {
-				text: 'continue_with',
-				width: window.innerWidth <= 400 ? window.innerWidth - 40 : 235, // max button width is 400
+				text: 'signin',
+				width: buttonWidth,
 			})
 		}
 	})
 </script>
 
-<div bind:this={loginRef} class="flex flex-col items-center" />
+<div bind:this={loginRef} class='flex justify-center'/>
