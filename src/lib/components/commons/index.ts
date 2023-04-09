@@ -4,6 +4,7 @@ import FormItem from '$lib/components/commons/FormItem/FormItem.svelte'
 import GoogleLogin from '$lib/components/commons/GoogleLogin/GoogleLogin.svelte'
 import Header from '$lib/components/commons/Header/Header.svelte'
 import Input from '$lib/components/commons/Input/Input.svelte'
+import Loader from '$lib/components/commons/Loader/Loader.svelte'
 import Menu from '$lib/components/commons/Menu/Menu.svelte'
 import PageTwoTone from '$lib/components/commons/PageTwoTone/PageTwoTone.svelte'
 import SignInForm from '$lib/components/commons/SignInForm/SignInForm.svelte'
@@ -15,6 +16,7 @@ export {
 	GoogleLogin,
 	Header,
 	Input,
+	Loader,
 	Menu,
 	PageTwoTone,
 	SignInForm,

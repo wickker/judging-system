@@ -4,7 +4,7 @@
 
 <Header title="Competitions">
 	<!-- Page stuff goes here -->
-	<div class="fixed bottom-0 flex w-full justify-end px-3 py-5">
+	<div class="fixed bottom-0 flex w-full max-w-lg justify-end px-3 py-5">
 		<ButtonCircularPlus />
 	</div>
 </Header>

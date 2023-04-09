@@ -3,8 +3,14 @@
 	import { PUBLIC_VITE_GOOGLE_CLIENT_ID, PUBLIC_VITE_BASE_URL } from '$env/static/public'
 	import { ROUTES } from '$lib/utils/constants/routes'
 	import { page } from '$app/stores'
+	import { Loader } from '$lib/components/commons'
 
 	let loginRef: HTMLDivElement | undefined = undefined
+	let isLoggingIn = false
+
+	function handleClickGoogleLogin() {
+		isLoggingIn = true
+	}
 
 	onMount(async function () {
 		if ('google' in window) {
@@ -18,9 +24,16 @@
 
 			google.accounts.id.renderButton(loginRef, {
 				text: 'continue_with',
+				click_listener: handleClickGoogleLogin,
 			})
 		}
 	})
 </script>
 
-<div bind:this={loginRef} class="flex justify-center" />
+{#if isLoggingIn}
+	<div class="flex justify-center">
+		<Loader />
+	</div>
+{:else}
+	<div bind:this={loginRef} class="flex justify-center" />
+{/if}
