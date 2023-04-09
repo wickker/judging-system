@@ -19,7 +19,7 @@
 	description="Sign in as an administrator to view and manage all your competitions and sessions."
 >
 	<div class="px-5 py-8">
-		<SignInForm bind:form buttonText="Sign in" showPasswordHelper buttonColor='indigo'/>
+		<SignInForm bind:form buttonText="Sign in" showPasswordHelper buttonColor="indigo" />
 	</div>
 
 	<div class="bg-neutral-100 px-5 py-8">

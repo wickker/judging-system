@@ -9,7 +9,6 @@
 	onMount(async function () {
 		if ('google' in window) {
 			const google = window.google as any
-			const buttonWidth = 320 // max button width is 400
 
 			google.accounts.id.initialize({
 				client_id: PUBLIC_VITE_GOOGLE_CLIENT_ID,
@@ -18,11 +17,10 @@
 			})
 
 			google.accounts.id.renderButton(loginRef, {
-				text: 'signin',
-				width: buttonWidth,
+				text: 'continue_with',
 			})
 		}
 	})
 </script>
 
-<div bind:this={loginRef} class='flex justify-center'/>
+<div bind:this={loginRef} class="flex justify-center" />

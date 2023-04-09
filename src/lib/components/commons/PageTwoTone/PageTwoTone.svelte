@@ -15,7 +15,7 @@
 		{description}
 	</p>
 
-	<div class="fixed bottom-0 flex w-full flex-col rounded-t-3xl bg-neutral-50 max-w-lg">
+	<div class="fixed bottom-0 flex w-full max-w-lg flex-col rounded-t-3xl bg-neutral-50">
 		<slot />
 	</div>
 </div>

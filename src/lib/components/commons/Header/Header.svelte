@@ -30,9 +30,9 @@
 		isMenuVisible = !isMenuVisible
 	}
 
-  function handleCloseMenu() {
-    isMenuVisible = false
-  }
+	function handleCloseMenu() {
+		isMenuVisible = false
+	}
 </script>
 
 <div class="grid h-[70px] grid-cols-[40px_1fr_40px] items-center gap-x-3 bg-dark-indigo px-5">
