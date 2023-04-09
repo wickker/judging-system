@@ -3,7 +3,7 @@
 	import type { ActionData } from './$types'
 	import type { FormErrorResp } from '$lib/types/commons'
 
-	export let form: ActionData | FormErrorResp = null
+	export let form: ActionData | FormErrorResp = null{{}}
 
 	// TODO: Handle case { message: 'Invalid credentials' } with notifications
 	$: console.log('form : ', form)
