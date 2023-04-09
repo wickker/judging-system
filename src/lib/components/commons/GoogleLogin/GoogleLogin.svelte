@@ -12,6 +12,7 @@
 		isLoggingIn = true
 	}
 
+	// TODO: Find another way to implement this
 	onMount(async function () {
 		if ('google' in window) {
 			const google = window.google as any
