@@ -4,6 +4,7 @@ export const ROUTES = {
 	LOGIN_ADMIN: '/login-admin',
 	LOGIN_JUDGE: '/login-judge',
 	SESSIONS: '/sessions',
+	COMPETITIONS: '/competitions',
 	API: {
 		GOOGLE_AUTH: '/api/google-auth',
 		LOGOUT: '/api/logout',
@@ -15,5 +16,6 @@ export const ROUTES_NO_AUTH: Array<string> = [
 	ROUTES.REGISTER,
 	ROUTES.LOGIN_ADMIN,
 	ROUTES.LOGIN_JUDGE,
+	ROUTES.SESSIONS,
 	ROUTES.API.GOOGLE_AUTH,
 ]

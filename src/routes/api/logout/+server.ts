@@ -14,7 +14,6 @@ export const GET: RequestHandler = async ({ cookies, locals }) => {
 	})
 
 	if ('user' in locals) {
-		console.log('this runs')
 		await userDto.expireClientToken((locals.user as User).email)
 	}
 
