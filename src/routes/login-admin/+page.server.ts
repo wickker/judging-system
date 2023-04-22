@@ -24,7 +24,9 @@ const loginAdmin: Action = async ({ request, cookies }) => {
 	const isPasswordMatch = await bcrypt.compare(res.data.password, user?.hashedPassword || '')
 
 	if (!user || !isPasswordMatch) {
-		return fail(400, { errorMessage: 'Invalid credentials' } satisfies FormErrorResp<UserRegistrationForm>)
+		return fail(400, {
+			errorMessage: 'Invalid credentials',
+		} satisfies FormErrorResp<UserRegistrationForm>)
 	}
 
 	const authenticatedUser = await userDto.updateClientTokenAndExpiry(user.id)

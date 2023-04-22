@@ -12,7 +12,7 @@
 	class:border-neutral-100={disabled}
 	class:border-neutral-200={!disabled}
 	class:border-red-400={hasError}
-	type='password'
+	type="password"
 	{disabled}
 	{placeholder}
 	{name}

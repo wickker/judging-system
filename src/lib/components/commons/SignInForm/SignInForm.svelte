@@ -30,7 +30,7 @@
 			let:slotName
 			name={slotName}
 			slot="formItem"
-			on:input={() => reset("email")}
+			on:input={() => reset('email')}
 			bind:ref={emailRef}
 		/>
 	</FormItem>
@@ -40,7 +40,7 @@
 			let:slotName
 			name={slotName}
 			slot="formItem"
-		  on:input={() => reset("password")}
+			on:input={() => reset('password')}
 		/>
 		{#if showPasswordHelper}
 			<!-- TODO: Handle forgot password -->
