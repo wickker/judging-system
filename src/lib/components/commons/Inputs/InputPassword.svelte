@@ -1,9 +1,8 @@
 <script lang="ts">
-	export let type = 'text'
 	export let disabled = false
 	export let hasError = false
 	export let placeholder = ''
-	export let name = ''
+	export let name: string | null | undefined = undefined
 	export let value = ''
 	export let ref: HTMLInputElement | undefined = undefined
 </script>
@@ -13,12 +12,12 @@
 	class:border-neutral-100={disabled}
 	class:border-neutral-200={!disabled}
 	class:border-red-400={hasError}
+	type='password'
 	{disabled}
 	{placeholder}
-	{type}
 	{name}
 	on:input
 	autocomplete="on"
 	bind:this={ref}
-	{value}
+	bind:value
 />

@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import { fail, redirect } from '@sveltejs/kit'
 import type { Action } from './$types'
 import db from '$lib/db/database'
-import { UserRegistrationFormSchema } from '$lib/types/user'
+import { UserRegistrationFormSchema, type UserRegistrationForm } from '$lib/types/user'
 import { convertZodErrorsToFormErrorResp } from '$lib/utils/functions/commons'
 import type { FormErrorResp } from '$lib/types/commons'
 import { COOKIES, COOKIE_CONFIGS } from '$lib/utils/constants/clientStorage'
@@ -17,14 +17,14 @@ const loginAdmin: Action = async ({ request, cookies }) => {
 
 	if (!res.success) {
 		const errors = convertZodErrorsToFormErrorResp(res.error)
-		return fail(400, { errors } satisfies FormErrorResp)
+		return fail(400, { errors } satisfies FormErrorResp<UserRegistrationForm>)
 	}
 
 	const user = await userDto.findByEmail(res.data.email)
 	const isPasswordMatch = await bcrypt.compare(res.data.password, user?.hashedPassword || '')
 
 	if (!user || !isPasswordMatch) {
-		return fail(400, { errorMessage: 'Invalid credentials' } satisfies FormErrorResp)
+		return fail(400, { errorMessage: 'Invalid credentials' } satisfies FormErrorResp<UserRegistrationForm>)
 	}
 
 	const authenticatedUser = await userDto.updateClientTokenAndExpiry(user.id)

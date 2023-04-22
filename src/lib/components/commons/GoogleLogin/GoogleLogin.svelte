@@ -26,6 +26,7 @@
 			google.accounts.id.renderButton(loginRef, {
 				text: 'continue_with',
 				click_listener: handleClickGoogleLogin,
+				width: 300,
 			})
 		}
 	})

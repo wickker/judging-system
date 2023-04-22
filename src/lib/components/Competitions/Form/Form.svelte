@@ -1,20 +1,25 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
-	import type { Form } from '$lib/types/commons'
-	import { Input, FormItem } from '$lib/components/commons'
-	import { enhance } from '$app/forms'
-	import type { CompetitionForm } from '$lib/types/competition'
+	import { Input, FormItem, InputNumber } from '$lib/components/commons'
+	import { CompetitionFormSchema, type CompetitionForm } from '$lib/types/competition'
+	import { convertZodErrorsToFormErrorResp, resetError } from '$lib/utils/functions/commons'
+	import type { FormErrors } from '$lib/types/commons'
 
-	export let form: Form<CompetitionForm> = null
+	export let form: CompetitionForm
 	export let formId = ''
-	export let actionUrl = ''
 
+	let errors: FormErrors<CompetitionForm> = { name: [], year: [] }
 	let nameRef: HTMLInputElement | undefined = undefined
 
-	function resetError(keyName: string) {
-		if (form?.errors?.[keyName] && form.errors[keyName].length > 0) {
-			form.errors[keyName] = []
+	function handleSubmit() {
+		const res = CompetitionFormSchema.safeParse(form)
+
+		if (!res.success) {
+			errors = convertZodErrorsToFormErrorResp(res.error) as FormErrors<CompetitionForm>
+			return
 		}
+
+		// TODO: Call API
 	}
 
 	onMount(() => {
@@ -22,24 +27,21 @@
 	})
 </script>
 
-<form id={formId} method="POST" action={actionUrl} use:enhance>
-	<FormItem label="Name" slotName="name" errorMessage={form?.errors?.name?.[0] || ''}>
+<form on:submit|preventDefault={handleSubmit} id={formId}>
+	<FormItem label="Name" errorMessage={errors?.name?.[0] || ''}>
 		<Input
-			let:slotName
-			name={slotName}
 			slot="formItem"
-			on:input={() => resetError(slotName)}
 			bind:ref={nameRef}
+			bind:value={form.name}
+			on:input={() => (errors = resetError(errors, 'name'))}
 		/>
 	</FormItem>
 
-	<FormItem label="Year" slotName="year" errorMessage={form?.errors?.year?.[0] || ''}>
-		<Input
-			let:slotName
-			name={slotName}
+	<FormItem label="Year" errorMessage={errors?.year?.[0] || ''}>
+		<InputNumber
 			slot="formItem"
-			type="number"
-			on:input={() => resetError(slotName)}
+			bind:value={form.year}
+			on:input={() => (errors = resetError(errors, 'year'))}
 		/>
 	</FormItem>
 </form>
