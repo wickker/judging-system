@@ -13,9 +13,9 @@
 
 	let emailRef: HTMLInputElement | undefined = undefined
 
-	function reset(s: keyof UserRegistrationForm) {
+	function reset(k: keyof UserRegistrationForm) {
 		if (form?.errors) {
-			form.errors = resetError(form.errors, s)
+			form.errors = resetError(form.errors, k)
 		}
 	}
 

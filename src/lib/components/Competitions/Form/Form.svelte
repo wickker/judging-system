@@ -4,6 +4,7 @@
 	import { CompetitionFormSchema, type CompetitionForm } from '$lib/types/competition'
 	import { convertZodErrorsToFormErrorResp, resetError } from '$lib/utils/functions/commons'
 	import type { FormErrors } from '$lib/types/commons'
+  import { ROUTES } from '$lib/utils/constants/routes'
 
 	export let form: CompetitionForm
 	export let formId = ''
@@ -11,7 +12,7 @@
 	let errors: FormErrors<CompetitionForm> = { name: [], year: [] }
 	let nameRef: HTMLInputElement | undefined = undefined
 
-	function handleSubmit() {
+	async function handleSubmit() {
 		const res = CompetitionFormSchema.safeParse(form)
 
 		if (!res.success) {
@@ -19,7 +20,21 @@
 			return
 		}
 
-		// TODO: Call API
+		try {
+			const response = await fetch(ROUTES.API.COMPETITIONS, {
+				method: 'POST', 
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(res.data),
+			})
+			const newCompetition = await response.json()
+			console.log(newCompetition)
+			
+		} catch (error) {
+			console.error(error)
+			// TODO: Show notification
+		}
 	}
 
 	onMount(() => {

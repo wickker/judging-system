@@ -12,37 +12,42 @@ datasource db {
 }
 
 model User {
-  id                Int       @id @default(autoincrement()) @db.UnsignedInt
-  email             String    @unique
+  id                Int           @id @default(autoincrement()) @db.UnsignedInt
+  email             String        @unique
   hashedPassword    String
-  clientToken       String    @unique
+  clientToken       String        @unique
   clientTokenExpiry DateTime
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime? @updatedAt
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime?     @updatedAt
   deletedAt         DateTime?
+  Competition       Competition[]
 }
 
 model Judge {
-  id           Int            @id @default(autoincrement()) @db.UnsignedInt
-  name         String
-  email        String
-  code         String?
-  codeExpiry   DateTime?
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime?      @updatedAt
-  deletedAt    DateTime?
-  SessionJudge SessionJudge[]
+  id            Int            @id @default(autoincrement()) @db.UnsignedInt
+  name          String
+  email         String
+  code          String?
+  codeExpiry    DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime?      @updatedAt
+  deletedAt     DateTime?
+  sessionJudges SessionJudge[]
 }
 
 model Competition {
-  id         Int          @id @default(autoincrement()) @db.UnsignedInt
-  name       String
-  year       Int
-  sessions   Session[]
-  createdAt  DateTime     @default(now())
-  updatedAt  DateTime?    @updatedAt
-  deletedAt  DateTime?
-  Competitor Competitor[]
+  id          Int          @id @default(autoincrement()) @db.UnsignedInt
+  name        String
+  year        Int
+  sessions    Session[]
+  user        User         @relation(fields: [userId], references: [id])
+  userId      Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime?    @updatedAt
+  deletedAt   DateTime?
+  competitors Competitor[]
+
+  @@index([userId])
 }
 
 model Session {
@@ -55,8 +60,8 @@ model Session {
   createdAt     DateTime       @default(now())
   updatedAt     DateTime?      @updatedAt
   deletedAt     DateTime?
-  SessionJudge  SessionJudge[]
-  Competitor    Competitor[]
+  sessionJudges SessionJudge[]
+  competitors   Competitor[]
 
   @@index([competitionId])
 }

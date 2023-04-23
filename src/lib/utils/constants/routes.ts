@@ -8,6 +8,7 @@ export const ROUTES = {
 	API: {
 		GOOGLE_AUTH: '/api/google-auth',
 		LOGOUT: '/api/logout',
+		COMPETITIONS: '/api/competitions'
 	},
 } as const
 
