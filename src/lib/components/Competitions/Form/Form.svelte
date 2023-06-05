@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
+	import { onMount, createEventDispatcher } from 'svelte'
 	import { Input, FormItem, InputNumber } from '$lib/components/commons'
 	import { CompetitionFormSchema, type CompetitionForm } from '$lib/types/competition'
 	import { convertZodErrorsToFormErrorResp, resetError } from '$lib/utils/functions/commons'
 	import type { FormErrors } from '$lib/types/commons'
-  import { ROUTES } from '$lib/utils/constants/routes'
+	import { ROUTES } from '$lib/utils/constants/routes'
+	import type { Competition } from '@prisma/client'
 
 	export let form: CompetitionForm
 	export let formId = ''
@@ -12,17 +13,20 @@
 	let errors: FormErrors<CompetitionForm> = { name: [], year: [] }
 	let nameRef: HTMLInputElement | undefined = undefined
 
+	const dispatch = createEventDispatcher<{ submit: Competition | null }>()
+
 	async function handleSubmit() {
 		const res = CompetitionFormSchema.safeParse(form)
 
 		if (!res.success) {
 			errors = convertZodErrorsToFormErrorResp(res.error) as FormErrors<CompetitionForm>
+			dispatch('submit', null)
 			return
 		}
 
 		try {
 			const response = await fetch(ROUTES.API.COMPETITIONS, {
-				method: 'POST', 
+				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -30,9 +34,10 @@
 			})
 			const newCompetition = await response.json()
 			console.log(newCompetition)
-			
+			dispatch('submit', newCompetition)
 		} catch (error) {
 			console.error(error)
+			dispatch('submit', null)
 			// TODO: Show notification
 		}
 	}

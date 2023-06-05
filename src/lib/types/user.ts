@@ -3,7 +3,7 @@ import { ZOD_ERROR_MESSAGES } from '$lib/utils/constants/errors'
 import { REGEX } from '$lib/utils/constants/regex'
 
 // Requests
-export const UserRegistrationFormSchema = z.object({
+export const LoginFormSchema = z.object({
 	email: z.string().trim().min(1).email(),
 	password: z
 		.string()
@@ -13,4 +13,4 @@ export const UserRegistrationFormSchema = z.object({
 
 // Responses
 
-export type UserRegistrationForm = z.infer<typeof UserRegistrationFormSchema>
+export type LoginForm = z.infer<typeof LoginFormSchema>

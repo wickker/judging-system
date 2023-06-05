@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
 	export let disabled = false
 	export let hasError = false
 	export let placeholder = ''
@@ -20,4 +20,4 @@
 	autocomplete="on"
 	bind:this={ref}
 	bind:value
-/>
+/> -->

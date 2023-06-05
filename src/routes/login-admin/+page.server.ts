@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs'
 import { fail, redirect } from '@sveltejs/kit'
 import type { Action } from './$types'
 import db from '$lib/db/database'
-import { UserRegistrationFormSchema, type UserRegistrationForm } from '$lib/types/user'
+import { LoginFormSchema, type LoginForm } from '$lib/types/user'
 import { convertZodErrorsToFormErrorResp } from '$lib/utils/functions/commons'
 import type { FormErrorResp } from '$lib/types/commons'
 import { COOKIES, COOKIE_CONFIGS } from '$lib/utils/constants/clientStorage'
@@ -13,11 +13,11 @@ const userDto = useUserDto(db)
 
 const loginAdmin: Action = async ({ request, cookies }) => {
 	const data = Object.fromEntries(await request.formData())
-	const res = UserRegistrationFormSchema.safeParse(data)
+	const res = LoginFormSchema.safeParse(data)
 
 	if (!res.success) {
 		const errors = convertZodErrorsToFormErrorResp(res.error)
-		return fail(400, { errors } satisfies FormErrorResp<UserRegistrationForm>)
+		return fail(400, { errors } satisfies FormErrorResp<LoginForm>)
 	}
 
 	const user = await userDto.findByEmail(res.data.email)
@@ -26,7 +26,7 @@ const loginAdmin: Action = async ({ request, cookies }) => {
 	if (!user || !isPasswordMatch) {
 		return fail(400, {
 			errorMessage: 'Invalid credentials',
-		} satisfies FormErrorResp<UserRegistrationForm>)
+		} satisfies FormErrorResp<LoginForm>)
 	}
 
 	const authenticatedUser = await userDto.updateClientTokenAndExpiry(user.id)

@@ -1,7 +1,7 @@
 import { fail, redirect } from '@sveltejs/kit'
 import type { Action } from '@sveltejs/kit'
 import db from '$lib/db/database'
-import { UserRegistrationFormSchema, type UserRegistrationForm } from '$lib/types/user'
+import { LoginFormSchema, type LoginForm } from '$lib/types/user'
 import { convertZodErrorsToFormErrorResp } from '$lib/utils/functions/commons'
 import type { FormErrorResp } from '$lib/types/commons'
 import { ROUTES } from '$lib/utils/constants/routes'
@@ -11,18 +11,18 @@ const userDto = useUserDto(db)
 
 const register: Action = async ({ request }) => {
 	const data = Object.fromEntries(await request.formData())
-	const res = UserRegistrationFormSchema.safeParse(data)
+	const res = LoginFormSchema.safeParse(data)
 
 	if (!res.success) {
 		const errors = convertZodErrorsToFormErrorResp(res.error)
-		return fail(400, { errors } satisfies FormErrorResp<UserRegistrationForm>)
+		return fail(400, { errors } as FormErrorResp<LoginForm>)
 	}
 
 	const user = await userDto.findByEmail(res.data.email)
 	if (user) {
 		return fail(400, {
 			errors: { email: ['User already exists'], password: [] },
-		} satisfies FormErrorResp<UserRegistrationForm>)
+		} satisfies FormErrorResp<LoginForm>)
 	}
 
 	await userDto.create(res.data.email, res.data.password)
