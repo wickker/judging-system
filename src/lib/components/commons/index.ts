@@ -7,10 +7,10 @@ import InputNumber from '$lib/components/commons/Inputs/InputNumber.svelte'
 import InputPassword from '$lib/components/commons/Inputs/InputPassword.svelte'
 import InputText from '$lib/components/commons/Inputs/InputText.svelte'
 import Loader from '$lib/components/commons/Loader/Loader.svelte'
+import LoginForm from '$lib/components/commons/LoginForm/LoginForm.svelte'
 import Menu from '$lib/components/commons/Menu/Menu.svelte'
 import Modal from '$lib/components/commons/Modal/Modal.svelte'
 import PageTwoTone from '$lib/components/commons/PageTwoTone/PageTwoTone.svelte'
-import LoginForm from '$lib/components/commons/LoginForm/LoginForm.svelte'
 
 export {
 	Button,
@@ -22,8 +22,8 @@ export {
 	InputPassword,
 	InputText,
 	Loader,
+	LoginForm,
 	Menu,
 	Modal,
 	PageTwoTone,
-	LoginForm,
 }

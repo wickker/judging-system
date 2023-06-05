@@ -38,6 +38,6 @@
 	<!-- Footer -->
 	<div slot="footer" class="flex w-full items-center justify-between bg-neutral-50 px-4 py-5">
 		<Button color="indigo" on:click={handleCloseModal}>Cancel</Button>
-		<Button form={formId} type="submit" on:click={handleClickSubmit} {isLoading}>Submit</Button>
+		<!-- <Button form={formId} type="submit" on:click={handleClickSubmit} {isLoading}>Submit</Button> -->
 	</div>
 </Modal>

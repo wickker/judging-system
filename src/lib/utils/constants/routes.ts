@@ -8,7 +8,8 @@ export const ROUTES = {
 	API: {
 		GOOGLE_AUTH: '/api/google-auth',
 		LOGOUT: '/api/logout',
-		COMPETITIONS: '/api/competitions'
+		COMPETITIONS: '/api/competitions',
+		REGISTER: '/api/register',
 	},
 } as const
 
@@ -17,6 +18,6 @@ export const ROUTES_NO_AUTH: Array<string> = [
 	ROUTES.REGISTER,
 	ROUTES.LOGIN_ADMIN,
 	ROUTES.LOGIN_JUDGE,
-	ROUTES.SESSIONS,
 	ROUTES.API.GOOGLE_AUTH,
+	ROUTES.API.REGISTER,
 ]

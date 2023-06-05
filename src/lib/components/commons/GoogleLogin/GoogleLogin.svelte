@@ -13,7 +13,7 @@
 	}
 
 	// TODO: Find another way to implement this
-	onMount(async function () {
+	onMount(function () {
 		if ('google' in window) {
 			const google = window.google as any
 
@@ -37,5 +37,5 @@
 		<Loader />
 	</div>
 {:else}
-	<div bind:this={loginRef} class="flex justify-center" />
+	<div bind:this={loginRef} class="flex justify-start" />
 {/if}

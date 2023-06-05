@@ -26,7 +26,7 @@
 		searchValue = ''
 	}
 
-	function handleCLickMenu() {
+	function handleClickMenu() {
 		isMenuVisible = !isMenuVisible
 	}
 
@@ -48,7 +48,7 @@
 		<button
 			class="transition-transform active:scale-90"
 			in:fade={{ duration: 250 }}
-			on:click={handleCLickMenu}
+			on:click={handleClickMenu}
 		>
 			<img src={IconHamburger} alt="Icon hamburger" class="h-10 w-10" />
 		</button>

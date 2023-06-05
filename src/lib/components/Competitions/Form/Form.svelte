@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, createEventDispatcher } from 'svelte'
-	import { Input, FormItem, InputNumber } from '$lib/components/commons'
+	import { FormItem, InputNumber } from '$lib/components/commons'
 	import { CompetitionFormSchema, type CompetitionForm } from '$lib/types/competition'
 	import { convertZodErrorsToFormErrorResp, resetError } from '$lib/utils/functions/commons'
 	import type { FormErrors } from '$lib/types/commons'
@@ -47,7 +47,7 @@
 	})
 </script>
 
-<form on:submit|preventDefault={handleSubmit} id={formId}>
+<!-- <form on:submit|preventDefault={handleSubmit} id={formId}>
 	<FormItem label="Name" errorMessage={errors?.name?.[0] || ''}>
 		<Input
 			slot="formItem"
@@ -64,4 +64,4 @@
 			on:input={() => (errors = resetError(errors, 'year'))}
 		/>
 	</FormItem>
-</form>
+</form> -->
