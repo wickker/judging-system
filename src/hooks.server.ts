@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 	if (ROUTES_NO_AUTH.includes(event.url.pathname)) {
 		if (clientToken && ROUTES_REDIRECT_ON_AUTH.includes(event.url.pathname)) {
 			event = await injectUser(clientToken, event)
-			return new Response('Redirect', { status: 303, headers: { Location: ROUTES.SESSIONS } })
+			return new Response('Redirect', { status: 303, headers: { location: ROUTES.SESSIONS } })
 		}
 		return await resolve(event)
 	}
@@ -30,9 +30,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 			}
 			return await resolve(event)
 		}
-		throw error(400, {
-			message: 'Failed to authenticate user',
-		})
+		return new Response('Redirect', { status: 303, headers: { location: ROUTES.HOME } })
 	}
 
 	event = await injectUser(clientToken, event)
