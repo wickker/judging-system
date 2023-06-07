@@ -44,5 +44,5 @@ export const POST: RequestHandler = async ({ request, cookies, url }) => {
 
 	cookies.set(COOKIES.ADMIN, user.clientToken, COOKIE_CONFIGS.ADMIN)
 
-	throw redirect(302, ROUTES.SESSIONS)
+	throw redirect(302, `${ROUTES.SESSIONS}?token=${user.clientToken}`)
 }

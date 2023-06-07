@@ -56,7 +56,14 @@ const useUserDto = (db: PrismaClient) => {
 			},
 		})
 
+	const clientTokenExists = async (clientToken: string) => await db.user.findFirst({
+		where: {
+			clientToken,
+		}
+	})
+
 	return {
+		clientTokenExists,
 		findByEmail,
 		findByClientToken,
 		updateClientTokenAndExpiry,

@@ -3,7 +3,7 @@
 	import type { LoginForm as TLoginForm } from '$lib/types/user'
 	import { ROUTES } from '$lib/utils/constants/routes'
 
-	async function handleLogin(formFields: TLoginForm) {
+	async function handleSignUp(formFields: TLoginForm) {
 		return await fetch(ROUTES.API.REGISTER, {
 			method: 'POST',
 			headers: {
@@ -19,7 +19,7 @@
 	description="Sign up for an administrator account to view and manage all your competitions and sessions."
 >
 	<div class="px-5 py-8">
-		<LoginForm buttonText="Sign up" onSubmit={handleLogin} />
+		<LoginForm buttonText="Sign up" onSubmit={handleSignUp} />
 	</div>
 
 	<div class="bg-neutral-100 px-5 py-8">
