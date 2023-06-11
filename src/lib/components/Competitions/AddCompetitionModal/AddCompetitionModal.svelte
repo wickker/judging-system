@@ -24,10 +24,17 @@
 	function createCompetitionSuccessCB(data?: Competition) {
 		console.log('new competition : ', data)
 		// TODO:
+		isLoading = false
+		isVisible = false
+	}
+
+	function createCompetitonErrorCB() {
+		isLoading = false
 	}
 
 	async function handleSubmitForm() {
-		errors = await handleSubmit(formFields, errors, CompetitionFormSchema, ROUTES.API.COMPETITIONS, createCompetitionSuccessCB)
+		isLoading = true
+		errors = await handleSubmit(formFields, errors, CompetitionFormSchema, ROUTES.API.COMPETITIONS, createCompetitionSuccessCB, createCompetitonErrorCB)
 	}
 </script>
 

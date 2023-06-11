@@ -1,5 +1,5 @@
-import type { CompetitionForm } from '$lib/types/competition'
 import type { PrismaClient } from '@prisma/client'
+import type { CompetitionForm } from '$lib/types/competition'
 
 const useCompetitionDto = (db: PrismaClient) => {
 	const create = async ({ name, year }: CompetitionForm, userId: number) =>
@@ -7,11 +7,16 @@ const useCompetitionDto = (db: PrismaClient) => {
 			data: {
 				name,
 				year,
-        userId
+				userId,
 			},
 		})
 
-	return { create }
+	const findAllByUser = async (userId: number) =>
+		await db.competition.findMany({
+			where: { userId, deletedAt: null },
+		})
+
+	return { create, findAllByUser }
 }
 
 export default useCompetitionDto

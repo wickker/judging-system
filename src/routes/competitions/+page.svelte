@@ -2,6 +2,10 @@
 	import { Header, ButtonCircularPlus } from '$lib/components/commons'
 	import { AddCompetitionModal } from '$lib/components/Competitions'
 
+	export let data
+
+	$: console.log('data : ', data)
+
 	let isAddCompetitionModalVisible = false
 
 	function handleOpenAddCompeitionModal() {

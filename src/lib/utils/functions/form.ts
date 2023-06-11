@@ -37,7 +37,7 @@ export const handleSubmit = async (
 	zodSchema: z.Schema<T>,
 	route: string,
 	successCB?: (d?: K) => void,
-	failureCB?: () => void,
+	errorCB?: () => void,
 	method?: string
 ): Promise<FormErrors<T>> => {
 	const tempErrors = validate(formFields, errors, zodSchema)
@@ -49,7 +49,7 @@ export const handleSubmit = async (
 		const errorMessage = await res.json()
 		console.log('error : ', errorMessage)
 		// TODO: Show notification
-		failureCB && failureCB()
+		errorCB && errorCB()
 		return {}
 	}
 
