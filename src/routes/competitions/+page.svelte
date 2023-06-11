@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Header, ButtonCircularPlus } from '$lib/components/commons'
-	import { AddModal } from '$lib/components/Competitions'
+	import { AddCompetitionModal } from '$lib/components/Competitions'
 
 	let isAddCompetitionModalVisible = false
 
@@ -16,5 +16,5 @@
 </Header>
 
 {#if isAddCompetitionModalVisible}
-	<AddModal bind:isVisible={isAddCompetitionModalVisible} />
+	<AddCompetitionModal bind:isVisible={isAddCompetitionModalVisible} />
 {/if}

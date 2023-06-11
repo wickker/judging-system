@@ -15,8 +15,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
 		throw error(400, { message: JSON.stringify(res.error) })
 	}
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const competition = await competitionDto.create(res.data, (locals as any).user.id)
+	const competition = await competitionDto.create(res.data, locals.user.id)
 
 	return json(competition)
 }

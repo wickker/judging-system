@@ -2,7 +2,7 @@
 	export let isDisabled = false
 	export let hasError = false
 	export let placeholder = ''
-	export let value = ''
+	export let value = 0
 	export let ref: HTMLInputElement | undefined = undefined
 </script>
 

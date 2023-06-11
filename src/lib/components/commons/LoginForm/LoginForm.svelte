@@ -4,36 +4,27 @@
 	import type { FormErrors } from '$lib/types/commons'
 	import { FormItem, InputText, InputPassword, Button } from '$lib/components/commons'
 	import { LoginFormSchema, type LoginForm } from '$lib/types/user'
-	import useForm from '$lib/utils/hooks/useForm'
   import { DEFAULT_FORM_VALUES } from '$lib/utils/constants/defaults'
   import { ROUTES } from '$lib/utils/constants/routes'
+	import { handleSubmit, resetField } from '$lib/utils/functions/form'
 
 	export let buttonText: string = ''
-	export let onSubmit: (data: LoginForm) => Promise<Response>
+	export let route: string = ''
 
 	let formFields: LoginForm = DEFAULT_FORM_VALUES.LOGIN_FORM
 	let errors: FormErrors<LoginForm> = {}
 	let emailRef: HTMLInputElement | undefined = undefined
 
-	const { validate, resetField } = useForm(formFields, LoginFormSchema)
-
 	$: showPasswordHelper = !(buttonText === "Sign up")
 	$: buttonColor = showPasswordHelper ? "crimson" : "indigo" as "indigo" | "crimson"
 
-	async function handleSubmit() {
-		errors = validate(errors)
-		if (Object.keys(errors).length > 0) return
-		const res = await onSubmit(formFields)
-		
-		if (res.status >= 400) {
-			const errorMessage = await res.json()
-			console.log('error : ', errorMessage)
-			// TODO: Show notification
-			return
-		}
-
+	function successCB() {
 		formFields = DEFAULT_FORM_VALUES.LOGIN_FORM
 		goto(ROUTES.SESSIONS)
+	}
+
+	async function handleSubmitForm() {
+		errors = await handleSubmit(formFields, errors, LoginFormSchema, route, successCB)
 	}
 
 	onMount(function () {
@@ -62,4 +53,4 @@
 	{/if}
 </FormItem>
 
-<Button isBlock color={buttonColor} on:click={handleSubmit}>{buttonText}</Button>
+<Button isBlock color={buttonColor} on:click={handleSubmitForm}>{buttonText}</Button>

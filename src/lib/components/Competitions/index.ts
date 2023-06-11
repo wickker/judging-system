@@ -1,4 +1,4 @@
-import AddModal from '$lib/components/Competitions/AddModal/AddModal.svelte'
-import Form from '$lib/components/Competitions/Form/Form.svelte'
+import AddCompetitionModal from '$lib/components/Competitions/AddCompetitionModal/AddCompetitionModal.svelte'
+import CompetitionForm from '$lib/components/Competitions/CompetitionForm/CompetitionForm.svelte'
 
-export { AddModal, Form }
+export { AddCompetitionModal, CompetitionForm }

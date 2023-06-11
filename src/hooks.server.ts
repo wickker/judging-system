@@ -35,7 +35,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
 	event = await injectUser(clientToken, event)
 
-	return await resolve(event)
+	return await resolve(event) 
 }
 
 const handleGoogleLogin = async (

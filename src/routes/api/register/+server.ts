@@ -1,4 +1,4 @@
-import { error, type RequestHandler } from '@sveltejs/kit'
+import { json, error, type RequestHandler } from '@sveltejs/kit'
 import db from '$lib/db/database'
 import useUserDto from '$lib/dtos/users'
 import { LoginFormSchema } from '$lib/types/user'
@@ -26,5 +26,5 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 
 	cookies.set(COOKIES.ADMIN, newUser.clientToken, COOKIE_CONFIGS.ADMIN)
 
-	return new Response(null, { status: 204 })
+	return json(null)
 }

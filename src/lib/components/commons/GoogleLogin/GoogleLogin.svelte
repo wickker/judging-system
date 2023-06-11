@@ -12,7 +12,6 @@
 		isLoggingIn = true
 	}
 
-	// TODO: Find another way to implement this
 	onMount(function () {
 		if ('google' in window) {
 			const gLogin = window.google.accounts.id
