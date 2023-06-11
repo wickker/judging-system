@@ -1,10 +1,17 @@
 <script lang="ts">
-	import type { ActionData } from './$types'
-	import { SignInForm, PageTwoTone, GoogleLogin } from '$lib/components/commons'
-	import type { Form } from '$lib/types/commons'
-	import type { UserRegistrationForm } from '$lib/types/user'
+	import { LoginForm, PageTwoTone, GoogleLogin } from '$lib/components/commons'
+	import type { LoginForm as TLoginForm } from '$lib/types/user'
+	import { ROUTES } from '$lib/utils/constants/routes'
 
-	export let form: Form<UserRegistrationForm> = null
+	async function handleSignUp(formFields: TLoginForm) {
+		return await fetch(ROUTES.API.REGISTER, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(formFields),
+		})
+	}
 </script>
 
 <PageTwoTone
@@ -12,7 +19,7 @@
 	description="Sign up for an administrator account to view and manage all your competitions and sessions."
 >
 	<div class="px-5 py-8">
-		<SignInForm bind:form buttonText="Sign up" />
+		<LoginForm buttonText="Sign up" onSubmit={handleSignUp} />
 	</div>
 
 	<div class="bg-neutral-100 px-5 py-8">

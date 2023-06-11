@@ -1,5 +1,16 @@
 <script lang="ts">
+	import { onMount } from 'svelte'
+	import { goto } from '$app/navigation'
+	import { page } from '$app/stores'
 	import { Header } from '$lib/components/commons'
+	import { ROUTES } from '$lib/utils/constants/routes'
+
+	onMount(function () {
+		// handle google login
+		if ($page.url.searchParams.get('token')) {
+			goto(ROUTES.SESSIONS)
+		}
+	})
 </script>
 
 <Header title="Sessions">

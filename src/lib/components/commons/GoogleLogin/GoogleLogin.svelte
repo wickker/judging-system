@@ -13,20 +13,23 @@
 	}
 
 	// TODO: Find another way to implement this
-	onMount(async function () {
+	onMount(function () {
 		if ('google' in window) {
-			const google = window.google as any
+			const gLogin = window.google.accounts.id
 
-			google.accounts.id.initialize({
+			gLogin.initialize({
 				client_id: PUBLIC_VITE_GOOGLE_CLIENT_ID,
 				ux_mode: 'redirect',
 				login_uri: `${PUBLIC_VITE_BASE_URL}${ROUTES.API.GOOGLE_AUTH}?origin=${$page.url.pathname}`,
 			})
 
-			google.accounts.id.renderButton(loginRef, {
+			if (!loginRef) return
+
+			gLogin.renderButton(loginRef, {
 				text: 'continue_with',
 				click_listener: handleClickGoogleLogin,
-				width: 300,
+				width: '300',
+				type: 'standard',
 			})
 		}
 	})
@@ -37,5 +40,5 @@
 		<Loader />
 	</div>
 {:else}
-	<div bind:this={loginRef} class="flex justify-center" />
+	<div bind:this={loginRef} class="flex justify-start" />
 {/if}

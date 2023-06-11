@@ -3,7 +3,7 @@
 	import IconHamburger from '$lib/assets/icon-hamburger-crimson.svg'
 	import IconSearch from '$lib/assets/icon-search-crimson.svg'
 	import IconCross from '$lib/assets/icon-cross-crimson.svg'
-	import { Input, Menu } from '$lib/components/commons'
+	import { InputText, Menu } from '$lib/components/commons'
 
 	export let hasSearch = false
 	export let searchPlaceholder = ''
@@ -26,7 +26,7 @@
 		searchValue = ''
 	}
 
-	function handleCLickMenu() {
+	function handleClickMenu() {
 		isMenuVisible = !isMenuVisible
 	}
 
@@ -48,7 +48,7 @@
 		<button
 			class="transition-transform active:scale-90"
 			in:fade={{ duration: 250 }}
-			on:click={handleCLickMenu}
+			on:click={handleClickMenu}
 		>
 			<img src={IconHamburger} alt="Icon hamburger" class="h-10 w-10" />
 		</button>
@@ -56,8 +56,8 @@
 
 	{#if isSearchVisible}
 		<div class="col-span-2" in:fade={{ duration: 250 }}>
-			<Input
-				bind:value={searchValue}
+			<InputText
+				value={searchValue}
 				on:input={handleSearchInputChange}
 				placeholder={searchPlaceholder}
 			/>
