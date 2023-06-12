@@ -10,6 +10,7 @@ import Loader from '$lib/components/commons/Loader/Loader.svelte'
 import LoginForm from '$lib/components/commons/LoginForm/LoginForm.svelte'
 import Menu from '$lib/components/commons/Menu/Menu.svelte'
 import Modal from '$lib/components/commons/Modal/Modal.svelte'
+import Page from '$lib/components/commons/Page/Page.svelte'
 import PageTwoTone from '$lib/components/commons/PageTwoTone/PageTwoTone.svelte'
 
 export {
@@ -25,5 +26,6 @@ export {
 	LoginForm,
 	Menu,
 	Modal,
+	Page,
 	PageTwoTone,
 }
