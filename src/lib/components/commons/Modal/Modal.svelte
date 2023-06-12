@@ -1,5 +1,6 @@
 <script lang="ts">
-	import Portal from 'svelte-portal'
+	// import Portal from 'svelte-portal'
+	import { portal } from 'svelte-portal'
 	import { fade } from 'svelte/transition'
 	import IconCross from '$lib/assets/icon-cross-indigo.svg'
 
@@ -11,10 +12,12 @@
 	}
 </script>
 
-<Portal>
+<!-- <Portal> -->
 	<div
 		class="absolute inset-0 flex justify-center bg-transparent"
 		transition:fade={{ duration: 250 }}
+		use:portal={"body"}
+		hidden={!isVisible}
 	>
 		<div class="relative h-full w-full max-w-lg bg-white">
 			<button class="my-5 ml-3" on:click={handleCloseModal}>
@@ -32,4 +35,4 @@
 			{/if}
 		</div>
 	</div>
-</Portal>
+<!-- </Portal> -->

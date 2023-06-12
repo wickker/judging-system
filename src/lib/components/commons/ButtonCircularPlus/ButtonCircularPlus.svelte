@@ -13,7 +13,7 @@
 
 <button
 	on:click
-	class="flex items-center justify-center rounded-full p-2 text-lg text-white transition-transform active:scale-90 {getColors()}"
+	class="flex items-center justify-center rounded-full p-2 text-lg text-white transition-transform active:scale-90 {getColors()} z-50"
 >
 	<img src={IconPlus} alt="Icon plus" class="h-7 w-7" />
 </button>

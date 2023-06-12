@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Competition } from '@prisma/client'
+	import { DateTime } from 'luxon'
 	import { Modal, Button } from '$lib/components/commons'
 	import { CompetitionForm } from '$lib/components/Competitions'
 	import {
@@ -21,11 +22,17 @@
 		isVisible = false
 	}
 
+	function resetFormFields() {
+		formFields.name = ""
+		formFields.year = DateTime.local().year
+	}
+
 	function createCompetitionSuccessCB(data?: Competition) {
 		console.log('new competition : ', data)
-		// TODO:
+		// TODO: Add new competition to array
+		resetFormFields()
 		isLoading = false
-		isVisible = false
+		handleCloseModal()
 	}
 
 	function createCompetitonErrorCB() {
@@ -41,7 +48,7 @@
 <Modal bind:isVisible title="Add New Competition">
 	<!-- Content -->
 	<div class="mt-2 px-4">
-		<CompetitionForm {formFields} {errors} />
+		<CompetitionForm bind:formFields bind:errors />
 	</div>
 
 	<!-- Footer -->

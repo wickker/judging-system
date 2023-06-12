@@ -18,6 +18,7 @@
 <FormItem label="Name" errorMessage={errors?.name?.[0] || ''}>
 	<InputText
 		bind:value={formFields.name}
+		bind:ref={nameRef}
 		hasError={!!errors?.name}
 		on:input={() => (errors = resetField(errors, 'name'))}
 	/>
