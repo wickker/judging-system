@@ -1,37 +1,35 @@
 <script lang="ts">
 	import type { Competition } from '@prisma/client'
 	import { Modal, Button } from '$lib/components/commons'
-	import { CompetitionForm } from '$lib/components/Competitions'
-	import { CompetitionFormSchema, type GetCompetitionsRes } from '$lib/types/competition'
 	import { useForm } from '$lib/hooks/useForm'
-	import { DEFAULT_FORM_VALUES } from '$lib/utils/constants/defaults'
+	import { CompetitionForm } from '$lib/components/Competitions'
+	import {
+		CompetitionFormSchema,
+		type CompetitionForm as TCompetitionForm,
+	} from '$lib/types/competition'
 	import { ROUTES } from '$lib/utils/constants/routes'
 
 	export let isVisible = false
-	export let competitions: GetCompetitionsRes
+	export let competition: TCompetitionForm
 
 	const { form, refs, errors, onSubmit, isLoading } = useForm({
 		schema: CompetitionFormSchema,
-		defaultValues: DEFAULT_FORM_VALUES.COMPETITION_FORM,
+		defaultValues: competition,
 		route: ROUTES.API.COMPETITIONS,
-		successCB: createCompetitionSuccessCB,
+		successCB: updateCompetitionSuccessCB,
+		method: 'put',
 	})
 
 	function handleCloseModal() {
 		isVisible = false
 	}
 
-	function createCompetitionSuccessCB(data?: Competition) {
-		if (!data) return
-		competitions = [
-			{ name: data.name, year: data.year, id: data.id, _count: { sessions: 0 } },
-			...competitions,
-		]
-		handleCloseModal()
+	function updateCompetitionSuccessCB(data?: Competition) {
+		console.log('updated competition : ', competition)
 	}
 </script>
 
-<Modal bind:isVisible title="Add New Competition">
+<Modal bind:isVisible title="Edit Competition">
 	<!-- Content -->
 	<div class="mt-2 px-4">
 		<CompetitionForm {form} {refs} errors={$errors} />

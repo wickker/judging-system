@@ -2,32 +2,29 @@
 	import { onMount } from 'svelte'
 	import { FormItem, InputNumber, InputText } from '$lib/components/commons'
 	import type { CompetitionForm } from '$lib/types/competition'
-	import type { FormErrors } from '$lib/types/commons'
-	import { resetField } from '$lib/utils/functions/form'
+  import type { FormErrors, FormRefs } from '$lib/hooks/useForm'
 
-	export let formFields: CompetitionForm
+	export let form: CompetitionForm
+	export let refs: FormRefs<CompetitionForm>
 	export let errors: FormErrors<CompetitionForm>
 
-	let nameRef: HTMLInputElement | undefined = undefined
-
 	onMount(function () {
-		nameRef?.focus()
+		refs.name?.focus()
 	})
 </script>
 
-<FormItem label="Name" errorMessage={errors?.name?.[0] || ''}>
+<FormItem label="Name" errorMessage={errors.name}>
 	<InputText
-		bind:value={formFields.name}
-		bind:ref={nameRef}
-		hasError={!!errors?.name}
-		on:input={() => (errors = resetField(errors, 'name'))}
-	/>
+		bind:value={form.name}
+		bind:ref={refs.name}
+		hasError={!!errors.name}
+		/>
 </FormItem>
 
-<FormItem label="Year" errorMessage={errors?.year?.[0] || ''}>
+<FormItem label="Year" errorMessage={errors.year}>
 	<InputNumber
-		bind:value={formFields.year}
-		hasError={!!errors?.year}
-		on:input={() => (errors = resetField(errors, 'year'))}
+		bind:value={form.year}
+		bind:ref={refs.year}
+		hasError={!!errors.year}
 	/>
 </FormItem>

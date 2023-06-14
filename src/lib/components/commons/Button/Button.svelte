@@ -1,8 +1,12 @@
+<script lang="ts" context="module">
+	export type ButtonColor = 'indigo' | 'crimson'
+</script>
+
 <script lang="ts">
 	import { fade } from 'svelte/transition'
 	import { Loader } from '$lib/components/commons'
 
-	export let color: 'indigo' | 'crimson' = 'crimson'
+	export let color: ButtonColor = 'crimson'
 	export let isBlock = false
 	export let isLoading = false
 
@@ -24,6 +28,6 @@
 			<Loader size="s" />
 		</div>
 	{/if}
-	
+
 	<slot />
 </button>

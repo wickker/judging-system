@@ -7,5 +7,13 @@ export const CompetitionFormSchema = z.object({
 })
 
 // Responses
+export type GetCompetitionsRes = Array<{
+	name: string
+	year: number
+	id: number
+	_count: {
+		sessions: number
+	}
+}>
 
 export type CompetitionForm = z.infer<typeof CompetitionFormSchema>
