@@ -1,8 +1,8 @@
 import type { PrismaClient } from '@prisma/client'
-import type { CompetitionForm } from '$lib/types/competition'
+import type { CreateCompetitionForm, UpdateCompetitionForm } from '$lib/types/competition'
 
 const useCompetitionDto = (db: PrismaClient) => {
-	const create = async ({ name, year }: CompetitionForm, userId: number) =>
+	const create = async ({ name, year }: CreateCompetitionForm, userId: number) =>
 		await db.competition.create({
 			data: {
 				name,
@@ -31,7 +31,16 @@ const useCompetitionDto = (db: PrismaClient) => {
 			},
 		})
 
-	return { create, findAllByUser }
+	const update = async (competition: UpdateCompetitionForm) =>
+		await db.competition.update({
+			where: { id: competition.id },
+			data: {
+				name: competition.name,
+				year: competition.year,
+			},
+		})
+
+	return { create, findAllByUser, update }
 }
 
 export default useCompetitionDto

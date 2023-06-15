@@ -2,16 +2,16 @@
 	import type { Competition } from '@prisma/client'
 	import { Modal, Button } from '$lib/components/commons'
 	import { CompetitionForm } from '$lib/components/Competitions'
-	import { CompetitionFormSchema, type GetCompetitionsRes } from '$lib/types/competition'
+	import { CreateCompetitionFormSchema, type GetCompetitionRes } from '$lib/types/competition'
 	import { useForm } from '$lib/hooks/useForm'
 	import { DEFAULT_FORM_VALUES } from '$lib/utils/constants/defaults'
 	import { ROUTES } from '$lib/utils/constants/routes'
 
 	export let isVisible = false
-	export let competitions: GetCompetitionsRes
+	export let competitions: Array<GetCompetitionRes>
 
 	const { form, refs, errors, onSubmit, isLoading } = useForm({
-		schema: CompetitionFormSchema,
+		schema: CreateCompetitionFormSchema,
 		defaultValues: DEFAULT_FORM_VALUES.COMPETITION_FORM,
 		route: ROUTES.API.COMPETITIONS,
 		successCB: createCompetitionSuccessCB,

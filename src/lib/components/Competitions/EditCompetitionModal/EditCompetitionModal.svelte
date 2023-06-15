@@ -4,17 +4,19 @@
 	import { useForm } from '$lib/hooks/useForm'
 	import { CompetitionForm } from '$lib/components/Competitions'
 	import {
-		CompetitionFormSchema,
-		type CompetitionForm as TCompetitionForm,
+		UpdateCompetitionFormSchema,
+		type GetCompetitionRes,
+		type UpdateCompetitionForm,
 	} from '$lib/types/competition'
 	import { ROUTES } from '$lib/utils/constants/routes'
 
 	export let isVisible = false
-	export let competition: TCompetitionForm
+	export let competition: UpdateCompetitionForm
+	export let competitions: Array<GetCompetitionRes>
 
 	const { form, refs, errors, onSubmit, isLoading } = useForm({
-		schema: CompetitionFormSchema,
-		defaultValues: competition,
+		schema: UpdateCompetitionFormSchema,
+		defaultValues: { id: competition.id, name: competition.name, year: competition.year },
 		route: ROUTES.API.COMPETITIONS,
 		successCB: updateCompetitionSuccessCB,
 		method: 'put',
@@ -25,7 +27,13 @@
 	}
 
 	function updateCompetitionSuccessCB(data?: Competition) {
-		console.log('updated competition : ', competition)
+		if (!data) return
+		const idx = competitions.findIndex((c) => c.id === data.id)
+		if (idx >= 0) {
+			competitions[idx].name = data.name
+			competitions[idx].year = data.year
+		}
+		handleCloseModal()
 	}
 </script>
 

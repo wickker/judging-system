@@ -9,4 +9,4 @@ export const DEFAULT_FORM_VALUES = {
 		name: '',
 		year: DateTime.local().year,
 	},
-} 
+} as const
