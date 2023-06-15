@@ -12,6 +12,7 @@ import Menu from '$lib/components/commons/Menu/Menu.svelte'
 import Modal from '$lib/components/commons/Modal/Modal.svelte'
 import Page from '$lib/components/commons/Page/Page.svelte'
 import PageTwoTone from '$lib/components/commons/PageTwoTone/PageTwoTone.svelte'
+import PopConfirm from '$lib/components/commons/PopConfirm/PopConfirm.svelte'
 
 export {
 	Button,
@@ -28,4 +29,5 @@ export {
 	Modal,
 	Page,
 	PageTwoTone,
+	PopConfirm,
 }

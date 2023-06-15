@@ -3,6 +3,7 @@
 	import { AddCompetitionModal, CompetitionTile } from '$lib/components/Competitions'
 	import type { UpdateCompetitionForm } from '$lib/types/competition'
 	import EditCompetitionModal from '$lib/components/Competitions/EditCompetitionModal/EditCompetitionModal.svelte'
+  import PopConfirm from '$lib/components/commons/PopConfirm/PopConfirm.svelte'
 
 	export let data
 
@@ -10,6 +11,8 @@
 	let isEditModalVisible = false
 	let selectedCompetition: UpdateCompetitionForm
 	let competitions = data.competitions
+
+	let isPopConfirmVisible = true
 
 	function handleOpenAddModal() {
 		isAddModalVisible = true
@@ -55,4 +58,8 @@
 		competition={selectedCompetition}
 		bind:competitions
 	/>
+{/if}
+
+{#if isPopConfirmVisible}}
+	<PopConfirm />
 {/if}

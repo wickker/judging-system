@@ -9,6 +9,7 @@
 		type UpdateCompetitionForm,
 	} from '$lib/types/competition'
 	import { ROUTES } from '$lib/utils/constants/routes'
+	import IconTrash from '$lib/assets/icon-trash-crimson.svg'
 
 	export let isVisible = false
 	export let competition: UpdateCompetitionForm
@@ -37,7 +38,15 @@
 	}
 </script>
 
-<Modal bind:isVisible title="Edit Competition">
+<Modal bind:isVisible>
+	<!-- Title slot -->
+	<div class="flex items-center justify-between px-4 pb-3" slot="titleSlot">
+		<h1 class="text-2xl text-dark-indigo">Edit Competition</h1>
+		<button class="transition-transform active:scale-90">
+			<img src={IconTrash} alt="Icon trash" class="h-8 w-8" />
+		</button>
+	</div>
+
 	<!-- Content -->
 	<div class="mt-2 px-4">
 		<CompetitionForm {form} {refs} errors={$errors} />

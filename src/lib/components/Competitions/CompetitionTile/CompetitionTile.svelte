@@ -1,6 +1,5 @@
 <script lang="ts">
 	import IconEdit from '$lib/assets/icon-edit-zinc.svg'
-	import type { CreateCompetitionForm } from '$lib/types/competition'
 
 	export let name = ''
 	export let year = 0
