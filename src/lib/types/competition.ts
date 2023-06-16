@@ -6,11 +6,15 @@ export const CreateCompetitionFormSchema = z.object({
 	year: z.number().min(2000),
 })
 
-// Responses
-export const UpdateCompetitionFormSchema = z.object({
+export const DeleteCompetitionSchema = z.object({
 	id: z.number(),
-}).merge(CreateCompetitionFormSchema)
+})
 
+export const UpdateCompetitionFormSchema = DeleteCompetitionSchema.merge(
+	CreateCompetitionFormSchema
+)
+
+// Responses
 export type GetCompetitionRes = {
 	name: string
 	year: number
@@ -20,5 +24,6 @@ export type GetCompetitionRes = {
 	}
 }
 
-export type CreateCompetitionForm = z.infer<typeof CreateCompetitionFormSchema>
-export type UpdateCompetitionForm = z.infer<typeof UpdateCompetitionFormSchema>
+export type CreateCompetitionReq = z.infer<typeof CreateCompetitionFormSchema>
+export type UpdateCompetitionReq = z.infer<typeof UpdateCompetitionFormSchema>
+export type DeleteCompetitionReq = z.infer<typeof DeleteCompetitionSchema>

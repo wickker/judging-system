@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte'
 	import { FormItem, InputNumber, InputText } from '$lib/components/commons'
-	import type { CreateCompetitionForm } from '$lib/types/competition'
+	import type { CreateCompetitionReq } from '$lib/types/competition'
   import type { FormErrors, FormRefs } from '$lib/hooks/useForm'
 
-	export let form: CreateCompetitionForm
-	export let refs: FormRefs<CreateCompetitionForm>
-	export let errors: FormErrors<CreateCompetitionForm>
+	export let form: CreateCompetitionReq
+	export let refs: FormRefs<CreateCompetitionReq>
+	export let errors: FormErrors<CreateCompetitionReq>
 
 	onMount(function () {
 		refs.name?.focus()

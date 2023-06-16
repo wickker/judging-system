@@ -1,18 +1,18 @@
 <script lang="ts">
 	import type { Competition } from '@prisma/client'
-	import { Modal, Button } from '$lib/components/commons'
+	import { Modal, Button, PopConfirm } from '$lib/components/commons'
 	import { useForm } from '$lib/hooks/useForm'
 	import { CompetitionForm } from '$lib/components/Competitions'
 	import {
 		UpdateCompetitionFormSchema,
 		type GetCompetitionRes,
-		type UpdateCompetitionForm,
+		type UpdateCompetitionReq,
 	} from '$lib/types/competition'
 	import { ROUTES } from '$lib/utils/constants/routes'
 	import IconTrash from '$lib/assets/icon-trash-crimson.svg'
 
 	export let isVisible = false
-	export let competition: UpdateCompetitionForm
+	export let competition: UpdateCompetitionReq
 	export let competitions: Array<GetCompetitionRes>
 
 	const { form, refs, errors, onSubmit, isLoading } = useForm({
@@ -36,15 +36,36 @@
 		}
 		handleCloseModal()
 	}
+
+	async function deleteRequest() {
+		return await fetch(ROUTES.API.COMPETITIONS, {
+			method: 'delete',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ id: competition.id }),
+		})
+	}
+
+	function deleteCompetitionSuccessCB() {
+		competitions = competitions.filter((c) => c.id !== competition.id)
+		handleCloseModal()
+	}
 </script>
 
 <Modal bind:isVisible>
 	<!-- Title slot -->
 	<div class="flex items-center justify-between px-4 pb-3" slot="titleSlot">
 		<h1 class="text-2xl text-dark-indigo">Edit Competition</h1>
-		<button class="transition-transform active:scale-90">
-			<img src={IconTrash} alt="Icon trash" class="h-8 w-8" />
-		</button>
+
+		<PopConfirm let:onConfirm title="Are you sure to delete this competition?">
+			<button
+				class="transition-transform active:scale-90"
+				on:click={() => onConfirm(deleteRequest, deleteCompetitionSuccessCB)}
+			>
+				<img src={IconTrash} alt="Icon trash" class="h-8 w-8" />
+			</button>
+		</PopConfirm>
 	</div>
 
 	<!-- Content -->

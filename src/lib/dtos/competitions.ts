@@ -1,8 +1,9 @@
 import type { PrismaClient } from '@prisma/client'
-import type { CreateCompetitionForm, UpdateCompetitionForm } from '$lib/types/competition'
+import { DateTime } from 'luxon'
+import type { CreateCompetitionReq, UpdateCompetitionReq } from '$lib/types/competition'
 
 const useCompetitionDto = (db: PrismaClient) => {
-	const create = async ({ name, year }: CreateCompetitionForm, userId: number) =>
+	const create = async ({ name, year }: CreateCompetitionReq, userId: number) =>
 		await db.competition.create({
 			data: {
 				name,
@@ -31,7 +32,7 @@ const useCompetitionDto = (db: PrismaClient) => {
 			},
 		})
 
-	const update = async (competition: UpdateCompetitionForm) =>
+	const update = async (competition: UpdateCompetitionReq) =>
 		await db.competition.update({
 			where: { id: competition.id },
 			data: {
@@ -40,7 +41,15 @@ const useCompetitionDto = (db: PrismaClient) => {
 			},
 		})
 
-	return { create, findAllByUser, update }
+		const softDelete = async (id: number) =>
+		await db.competition.update({
+			where: { id },
+			data: {
+				deletedAt: DateTime.local().toJSDate(),
+			},
+		})
+
+	return { create, findAllByUser, update, softDelete }
 }
 
 export default useCompetitionDto

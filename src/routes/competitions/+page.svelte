@@ -1,26 +1,27 @@
 <script lang="ts">
 	import { Header, ButtonCircularPlus, Page } from '$lib/components/commons'
 	import { AddCompetitionModal, CompetitionTile } from '$lib/components/Competitions'
-	import type { UpdateCompetitionForm } from '$lib/types/competition'
+	import type { UpdateCompetitionReq } from '$lib/types/competition'
 	import EditCompetitionModal from '$lib/components/Competitions/EditCompetitionModal/EditCompetitionModal.svelte'
-  import PopConfirm from '$lib/components/commons/PopConfirm/PopConfirm.svelte'
 
 	export let data
 
 	let isAddModalVisible = false
 	let isEditModalVisible = false
-	let selectedCompetition: UpdateCompetitionForm
+	let selectedCompetition: UpdateCompetitionReq
 	let competitions = data.competitions
-
-	let isPopConfirmVisible = true
 
 	function handleOpenAddModal() {
 		isAddModalVisible = true
 	}
 
-	function handleClickEdit(c: UpdateCompetitionForm) {
+	function handleClickEdit(c: UpdateCompetitionReq) {
 		selectedCompetition = c
 		isEditModalVisible = true
+	}
+
+	function greet() {
+		console.log('hello world')
 	}
 </script>
 
@@ -58,8 +59,4 @@
 		competition={selectedCompetition}
 		bind:competitions
 	/>
-{/if}
-
-{#if isPopConfirmVisible}}
-	<PopConfirm />
 {/if}

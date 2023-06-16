@@ -1,10 +1,26 @@
 import { json, error, type RequestHandler } from '@sveltejs/kit'
 import useCompetitionDto from '$lib/dtos/competitions'
 import db from '$lib/db/database'
-import { CreateCompetitionFormSchema, UpdateCompetitionFormSchema } from '$lib/types/competition'
+import { CreateCompetitionFormSchema, DeleteCompetitionSchema, UpdateCompetitionFormSchema } from '$lib/types/competition'
 import logger from '$lib/logger/logger'
 
 const competitionDto = useCompetitionDto(db)
+
+export const DELETE: RequestHandler = async ({ request }) => {
+	const data = await request.json()
+	const res = DeleteCompetitionSchema.safeParse(data)
+
+	if (!res.success) {
+		logger.error(
+			`Unable to zod parse update competition data : ${JSON.stringify(res.error.errors)}`
+		)
+		throw error(400, { message: JSON.stringify(res.error) })
+	}
+
+	await competitionDto.softDelete(res.data.id)
+
+	return json(null)
+}
 
 export const PUT: RequestHandler = async ({ request }) => {
 	const data = await request.json()
