@@ -1,15 +1,18 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal'
 	import { fade } from 'svelte/transition'
+	import { useNotification } from '$lib/hooks/useNotification'
 	import { Button } from '$lib/components/commons'
 
 	export let title = ''
 	export let description = ''
 
 	let confirmCB: () => Promise<Response>
-  let successCB: () => void = () => {}
+	let successCB: () => void = () => {}
 	let isVisible = false
-  let isLoading = false
+	let isLoading = false
+
+	const notification = useNotification()
 
 	function handleClosePopConfirm() {
 		isVisible = false
@@ -18,23 +21,26 @@
 	function onConfirm(func1: () => Promise<Response>, func2?: () => void) {
 		isVisible = true
 		confirmCB = func1
-    if (func2) {
-      successCB = func2
-    }
+		if (func2) {
+			successCB = func2
+		}
 	}
 
 	async function handleConfirm() {
-    isLoading = true
+		isLoading = true
 		const response = await confirmCB()
-    if (response.status >= 400) {
+		if (response.status >= 400) {
 			const errorMessage = await response.json()
-			console.error('error : ', errorMessage) // TODO: Show notification
-      isLoading = false
+			notification.create({
+				message: errorMessage,
+				type: 'error',
+			})
+			isLoading = false
 			return
 		}
-    successCB && successCB()
-    isLoading = false
-    handleClosePopConfirm()
+		successCB()
+		isLoading = false
+		handleClosePopConfirm()
 	}
 </script>
 

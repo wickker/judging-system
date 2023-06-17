@@ -1,5 +1,6 @@
 import { get, writable } from 'svelte/store'
 import type { ZodIssue, z } from 'zod'
+import { useNotification } from '$lib/hooks/useNotification'
 
 type UseFormProps<T, K> = {
 	schema: z.Schema<T>
@@ -26,6 +27,7 @@ export const useForm = <T extends object, K>({
 	errorCB,
 	method = 'post',
 }: UseFormProps<T, K>) => {
+	const notification = useNotification()
 	const form: T = structuredClone(defaultValues)
 	const refs: FormRefs<T> = {}
 	const errors = writable<FormErrors<T>>({})
@@ -107,7 +109,10 @@ export const useForm = <T extends object, K>({
 
 		if (response.status >= 400) {
 			const errorMessage = await response.json()
-			console.error('error : ', errorMessage) // TODO: Show notification
+			notification.create({
+				message: errorMessage,
+				type: 'error',
+			})
 			errorCB && errorCB()
 			isLoading.set(false)
 			return

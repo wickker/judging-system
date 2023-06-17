@@ -19,10 +19,6 @@
 		selectedCompetition = c
 		isEditModalVisible = true
 	}
-
-	function greet() {
-		console.log('hello world')
-	}
 </script>
 
 <Page>

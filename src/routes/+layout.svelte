@@ -1,5 +1,6 @@
 <script lang="ts">
 	import '../app.css'
+	import { Notification } from '$lib/components/commons'
 </script>
 
 <svelte:head>
@@ -8,5 +9,7 @@
 </svelte:head>
 
 <div class="mx-auto h-screen max-h-screen w-full max-w-lg bg-neutral-50">
-	<slot />
+	<Notification>
+		<slot />
+	</Notification>
 </div>
