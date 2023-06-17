@@ -73,7 +73,7 @@
 			>
 				<img src={IconSearch} alt="Icon search" class="h-9 w-9" />
 			</button>
-		{/if}
+		{/if}x
 	{/if}
 </div>
 
