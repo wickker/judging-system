@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte'
 	import { goto } from '$app/navigation'
 	import { page } from '$app/stores'
-	import { Header } from '$lib/components/commons'
+	import { Header, Page, Select } from '$lib/components/commons'
 	import { ROUTES } from '$lib/utils/constants/routes'
 
 	onMount(function () {
@@ -13,6 +13,12 @@
 	})
 </script>
 
-<Header title="Sessions">
-	<!-- Page stuff goes here -->
-</Header>
+<Page>
+	<Header title="Sessions" slot="header">
+		<div class="px-3 py-2 shadow-sm">
+			<Select />
+		</div>
+	</Header>
+
+	<div class='px-3 py-2'>Rest of the page</div>
+</Page>

@@ -30,7 +30,7 @@
 			route: ROUTES.API.LOGOUT,
 			label: 'Logout',
 		},
-	]
+	] as const
 
 	function handleCloseMenu() {
 		dispatch('close', true)

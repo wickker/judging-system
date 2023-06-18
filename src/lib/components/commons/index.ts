@@ -14,6 +14,7 @@ import Notification from '$lib/components/commons/Notification/Notification.svel
 import Page from '$lib/components/commons/Page/Page.svelte'
 import PageTwoTone from '$lib/components/commons/PageTwoTone/PageTwoTone.svelte'
 import PopConfirm from '$lib/components/commons/PopConfirm/PopConfirm.svelte'
+import Select from '$lib/components/commons/Select/Select.svelte'
 
 export {
 	Button,
@@ -32,4 +33,5 @@ export {
 	Page,
 	PageTwoTone,
 	PopConfirm,
+	Select,
 }

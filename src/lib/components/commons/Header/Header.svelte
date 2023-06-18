@@ -35,51 +35,53 @@
 	}
 </script>
 
-<div class="grid h-[70px] grid-cols-[40px_1fr_40px] items-center gap-x-3 bg-dark-indigo px-5">
-	{#if isSearchVisible}
-		<button
-			class="transition-transform active:scale-90"
-			on:click={handleClickCross}
-			in:fade={{ duration: 250 }}
-		>
-			<img src={IconCross} alt="Icon cross" class="h-10 w-10" />
-		</button>
-	{:else}
-		<button
-			class="transition-transform active:scale-90"
-			in:fade={{ duration: 250 }}
-			on:click={handleClickMenu}
-		>
-			<img src={IconHamburger} alt="Icon hamburger" class="h-10 w-10" />
-		</button>
-	{/if}
-
-	{#if isSearchVisible}
-		<div class="col-span-2" in:fade={{ duration: 250 }}>
-			<InputText
-				value={searchValue}
-				on:input={handleSearchInputChange}
-				placeholder={searchPlaceholder}
-			/>
-		</div>
-	{:else}
-		<h1 class="text-3xl text-white" in:fade={{ duration: 250 }}>{title}</h1>
-
-		{#if hasSearch}
+<div class="flex flex-col">
+	<div class="grid h-[70px] grid-cols-[40px_1fr_40px] items-center gap-x-3 bg-dark-indigo px-5">
+		{#if isSearchVisible}
 			<button
 				class="transition-transform active:scale-90"
-				on:click={handleClickSearch}
+				on:click={handleClickCross}
 				in:fade={{ duration: 250 }}
 			>
-				<img src={IconSearch} alt="Icon search" class="h-9 w-9" />
+				<img src={IconCross} alt="Icon cross" class="h-10 w-10" />
 			</button>
-		{/if}x
-	{/if}
+		{:else}
+			<button
+				class="transition-transform active:scale-90"
+				in:fade={{ duration: 250 }}
+				on:click={handleClickMenu}
+			>
+				<img src={IconHamburger} alt="Icon hamburger" class="h-10 w-10" />
+			</button>
+		{/if}
+
+		{#if isSearchVisible}
+			<div class="col-span-2" in:fade={{ duration: 250 }}>
+				<InputText
+					value={searchValue}
+					on:input={handleSearchInputChange}
+					placeholder={searchPlaceholder}
+				/>
+			</div>
+		{:else}
+			<h1 class="text-3xl text-white" in:fade={{ duration: 250 }}>{title}</h1>
+
+			{#if hasSearch}
+				<button
+					class="transition-transform active:scale-90"
+					on:click={handleClickSearch}
+					in:fade={{ duration: 250 }}
+				>
+					<img src={IconSearch} alt="Icon search" class="h-9 w-9" />
+				</button>
+			{/if}
+		{/if}
+	</div>
+
+	<!-- Rest of the header goes here -->
+	<slot />
 </div>
 
 {#if isMenuVisible}
 	<Menu on:close={handleCloseMenu} />
 {/if}
-
-<!-- Rest of the page goes here -->
-<slot />

@@ -45,9 +45,7 @@
 	</div>
 </Page>
 
-{#if isAddModalVisible}
-	<AddCompetitionModal bind:isVisible={isAddModalVisible} bind:competitions />
-{/if}
+<AddCompetitionModal bind:isVisible={isAddModalVisible} bind:competitions />
 
 {#if isEditModalVisible}
 	<EditCompetitionModal
