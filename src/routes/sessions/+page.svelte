@@ -5,6 +5,13 @@
 	import { Header, Page, Select } from '$lib/components/commons'
 	import { ROUTES } from '$lib/utils/constants/routes'
 
+	export let data
+
+	$: competitionOptions = data.competitions.map((c) => ({
+		label: `${c.name} (${c.year})`,
+		value: c.id,
+	}))
+
 	onMount(function () {
 		// handle google login
 		if ($page.url.searchParams.get('token')) {
@@ -17,10 +24,8 @@
 	<Header title="Sessions" slot="header">
 		<div class="px-3 py-2 shadow-sm">
 			<Select
-				options={[
-					{ label: 'Hello', value: 1 },
-					{ label: 'Bye', value: '2' },
-				]}
+				options={competitionOptions}
+				placeholder='Select a competition'
 			/>
 		</div>
 	</Header>

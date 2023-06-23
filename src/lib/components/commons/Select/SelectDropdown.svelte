@@ -34,26 +34,29 @@
 	>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
-			class="relative flex h-full w-full max-w-lg flex-col justify-center bg-black bg-opacity-50"
+			class="relative flex h-full w-full max-w-lg flex-col justify-center overflow-hidden bg-black bg-opacity-50"
 			on:click={handleClose}
 		>
 			<div
-				class="absolute bottom-0 w-full rounded-t-2xl bg-white px-3 py-8"
+				class="absolute bottom-0 w-full rounded-t-2xl bg-white py-10"
 				transition:slide={{ axis: 'y', duration: 250 }}
+				on:click={(e) => e.stopPropagation()}
 			>
-				{#each options as { label, value } (value)}
-					{@const isSelected = selectedOption?.value === value}
-					<button
-						class="flex w-full justify-between border-b border-b-zinc-200 py-2 text-dark-indigo"
-						on:click={(e) => handleSelect(e, label, value, isSelected)}
-					>
-						<p class:font-semibold={isSelected}>{label}</p>
+				<div class="max-h-[80vh] overflow-y-auto px-3">
+					{#each options as { label, value } (value)}
+						{@const isSelected = selectedOption?.value === value}
+						<button
+							class="flex w-full justify-between border-b border-b-zinc-200 py-2 text-dark-indigo"
+							on:click={(e) => handleSelect(e, label, value, isSelected)}
+						>
+							<p class:font-semibold={isSelected}>{label}</p>
 
-						{#if isSelected}
-							<img src={IconTick} alt="Icon tick" class="h-6 w-6" />
-						{/if}
-					</button>
-				{/each}
+							{#if isSelected}
+								<img src={IconTick} alt="Icon tick" class="h-6 w-6" />
+							{/if}
+						</button>
+					{/each}
+				</div>
 			</div>
 		</div>
 	</div>
