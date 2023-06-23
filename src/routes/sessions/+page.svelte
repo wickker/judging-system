@@ -16,9 +16,14 @@
 <Page>
 	<Header title="Sessions" slot="header">
 		<div class="px-3 py-2 shadow-sm">
-			<Select />
+			<Select
+				options={[
+					{ label: 'Hello', value: 1 },
+					{ label: 'Bye', value: '2' },
+				]}
+			/>
 		</div>
 	</Header>
 
-	<div class='px-3 py-2'>Rest of the page</div>
+	<div class="px-3 py-2">Rest of the page</div>
 </Page>

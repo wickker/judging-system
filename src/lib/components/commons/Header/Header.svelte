@@ -36,14 +36,14 @@
 </script>
 
 <div class="flex flex-col">
-	<div class="grid h-[70px] grid-cols-[40px_1fr_40px] items-center gap-x-3 bg-dark-indigo px-5">
+	<div class="grid h-[70px] grid-cols-[32px_1fr_40px] items-center gap-x-3 bg-dark-indigo px-5">
 		{#if isSearchVisible}
 			<button
 				class="transition-transform active:scale-90"
 				on:click={handleClickCross}
 				in:fade={{ duration: 250 }}
 			>
-				<img src={IconCross} alt="Icon cross" class="h-10 w-10" />
+				<img src={IconCross} alt="Icon cross" class="h-8 w-8" />
 			</button>
 		{:else}
 			<button
@@ -51,7 +51,7 @@
 				in:fade={{ duration: 250 }}
 				on:click={handleClickMenu}
 			>
-				<img src={IconHamburger} alt="Icon hamburger" class="h-10 w-10" />
+				<img src={IconHamburger} alt="Icon hamburger" class="h-8 w-8" />
 			</button>
 		{/if}
 
