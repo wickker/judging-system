@@ -3,7 +3,7 @@
 	import { createEventDispatcher } from 'svelte'
 	import { fade, slide } from 'svelte/transition'
 	import type { Option } from './Select.svelte'
-	import IconTick from '$lib/assets/icon-tick-crimson.svg'
+	import SelectOption from './SelectOption.svelte'
 	import IconSearch from '$lib/assets/icon-search-crimson.svg'
 	import IconCross from '$lib/assets/icon-cross-indigo.svg'
 	import { InputText } from '$lib/components/commons'
@@ -67,7 +67,7 @@
 			class="relative flex h-full w-full max-w-lg flex-col justify-center bg-black bg-opacity-50"
 			on:click={handleClose}
 		>
-		<!-- Dropdown -->
+			<!-- Dropdown -->
 			<div
 				class="absolute bottom-0 flex max-h-[100vh] w-full flex-col overflow-hidden bg-white py-10"
 				class:rounded-t-2xl={dropdownHeight && windowHeight && dropdownHeight < windowHeight}
@@ -88,17 +88,7 @@
 					{#if filteredOptions.length > 0}
 						{#each filteredOptions as { label, value } (value)}
 							{@const isSelected = selectedOption?.value === value}
-
-							<button
-								class="flex w-full justify-between border-b border-b-zinc-200 py-2 text-dark-indigo"
-								on:click={(e) => handleSelect(e, label, value, isSelected)}
-							>
-								<p class:font-semibold={isSelected}>{label}</p>
-
-								{#if isSelected}
-									<img src={IconTick} alt="Icon tick" class="h-6 w-6" />
-								{/if}
-							</button>
+							<SelectOption {handleSelect} {isSelected} {label} {value} />
 						{/each}
 					{:else}
 						<p class="pb-3 text-center text-zinc-500">No data</p>

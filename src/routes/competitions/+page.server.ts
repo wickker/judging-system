@@ -6,5 +6,5 @@ const competitionDto = useCompetitionDto(db)
 
 export const load: PageServerLoad = async ({ locals }) => {
 	const competitions = await competitionDto.findAllByUser(locals.user.id)
-  return { competitions }
+	return { competitions }
 }

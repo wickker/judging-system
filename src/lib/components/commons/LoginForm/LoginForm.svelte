@@ -8,8 +8,8 @@
 	import { useForm } from '$lib/hooks/useForm'
 	import type { ButtonColor } from '$lib/components/commons/Button/Button.svelte'
 
-	export let buttonText: string = ''
-	export let route: string = ''
+	export let buttonText = ''
+	export let route = ''
 
 	const { form, refs, errors, onSubmit } = useForm({
 		schema: LoginFormSchema,

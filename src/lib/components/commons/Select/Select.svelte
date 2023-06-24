@@ -1,8 +1,8 @@
 <script lang="ts" context="module">
 	export type Option<T = unknown> = {
-    label: string,
-    value: T
-  }
+		label: string
+		value: T
+	}
 </script>
 
 <script lang="ts">
@@ -24,15 +24,21 @@
 	}
 </script>
 
-<SelectDropdown bind:this={selectDropdown} {options} bind:selectedOption on:select={handleSelect} {hasSearch} />
+<SelectDropdown
+	bind:this={selectDropdown}
+	{options}
+	bind:selectedOption
+	on:select={handleSelect}
+	{hasSearch}
+/>
 
 <button
 	class="grid h-12 w-full grid-cols-[1fr_24px] rounded border bg-white px-2.5 py-3 text-left text-base text-neutral-600 outline-none"
 	class:border-neutral-100={isDisabled}
 	class:border-neutral-200={!isDisabled}
 	class:border-red-400={hasError}
-  class:text-neutral-400={!selectedOption?.label}
-  class:text-neutral-600={!!selectedOption?.label}
+	class:text-neutral-400={!selectedOption?.label}
+	class:text-neutral-600={!!selectedOption?.label}
 	on:click={selectDropdown.handleOpen}
 >
 	{selectedOption?.label || placeholder}

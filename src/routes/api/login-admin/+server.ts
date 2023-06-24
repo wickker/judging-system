@@ -13,15 +13,15 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
 
 	const parsed = LoginFormSchema.safeParse(data)
 	if (!parsed.success) {
-    logger.error(`Unable to zod parse login data : ${JSON.stringify(parsed.error.errors)}`)
-    throw error(400, { message: 'Invalid data format' })
-  }
+		logger.error(`Unable to zod parse login data : ${JSON.stringify(parsed.error.errors)}`)
+		throw error(400, { message: 'Invalid data format' })
+	}
 
-  const user = await userDto.findByEmail(data.email)
+	const user = await userDto.findByEmail(data.email)
 	const isPasswordMatch = await bcrypt.compare(data.password, user?.hashedPassword || '')
 
 	if (!user || !isPasswordMatch) {
-    logger.error(`Unable to find user or match password [User: ${data.email}]`)
+		logger.error(`Unable to find user or match password [User: ${data.email}]`)
 		throw error(400, {
 			message: 'Invalid credentials',
 		})

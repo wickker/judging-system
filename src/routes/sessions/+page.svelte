@@ -23,13 +23,9 @@
 <Page>
 	<Header title="Sessions" slot="header">
 		<div class="px-3 py-2 shadow-sm">
-			<Select
-				options={competitionOptions}
-				placeholder='Select a competition'
-				hasSearch
-			/>
+			<Select options={competitionOptions} placeholder="Select a competition" hasSearch />
 		</div>
 	</Header>
 
-	<div class="px-3 py-2"></div>
+	<div class="px-3 py-2" />
 </Page>

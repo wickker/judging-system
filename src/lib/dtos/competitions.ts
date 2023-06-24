@@ -41,7 +41,7 @@ const useCompetitionDto = (db: PrismaClient) => {
 			},
 		})
 
-		const softDelete = async (id: number) =>
+	const softDelete = async (id: number) =>
 		await db.competition.update({
 			where: { id },
 			data: {

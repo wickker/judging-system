@@ -1,7 +1,11 @@
 import { json, error, type RequestHandler } from '@sveltejs/kit'
 import useCompetitionDto from '$lib/dtos/competitions'
 import db from '$lib/db/database'
-import { CreateCompetitionFormSchema, DeleteCompetitionSchema, UpdateCompetitionFormSchema } from '$lib/types/competition'
+import {
+	CreateCompetitionFormSchema,
+	DeleteCompetitionSchema,
+	UpdateCompetitionFormSchema,
+} from '$lib/types/competition'
 import logger from '$lib/logger/logger'
 
 const competitionDto = useCompetitionDto(db)

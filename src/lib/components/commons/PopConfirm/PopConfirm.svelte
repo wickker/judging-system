@@ -8,7 +8,7 @@
 	export let description = ''
 
 	let confirmCB: () => Promise<Response>
-	let successCB: () => void = () => {}
+	let successCB: () => void
 	let isVisible = false
 	let isLoading = false
 

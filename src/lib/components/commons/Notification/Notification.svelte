@@ -25,7 +25,7 @@
 				<p>{message}</p>
 			</div>
 
-			<button class='transition-transform active:scale-90' on:click={() => remove(uuid)}>
+			<button class="transition-transform active:scale-90" on:click={() => remove(uuid)}>
 				<img src={IconCross} alt="Icon cross" class="h-6 w-6" />
 			</button>
 		</div>

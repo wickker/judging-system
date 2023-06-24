@@ -15,14 +15,14 @@
 	export let competition: UpdateCompetitionReq
 	export let competitions: Array<GetCompetitionRes>
 
-const { form, refs, errors, onSubmit, isLoading } = useForm({
+	const { form, refs, errors, onSubmit, isLoading } = useForm({
 		schema: UpdateCompetitionFormSchema,
 		defaultValues: { id: competition.id, name: competition.name, year: competition.year },
 		route: ROUTES.API.COMPETITIONS,
 		successCB: updateCompetitionSuccessCB,
 		method: 'put',
 	})
-	
+
 	function handleCloseModal() {
 		isVisible = false
 	}

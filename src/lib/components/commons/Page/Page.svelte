@@ -4,6 +4,6 @@
 	{:else}
 		<div />
 	{/if}
-  
+
 	<slot />
 </div>
