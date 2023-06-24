@@ -5,6 +5,7 @@ export const ROUTES = {
 	LOGIN_JUDGE: '/login-judge',
 	SESSIONS: '/sessions',
 	COMPETITIONS: '/competitions',
+	JUDGES: '/judges',
 	API: {
 		GOOGLE_AUTH: '/api/google-auth',
 		LOGOUT: '/api/logout',

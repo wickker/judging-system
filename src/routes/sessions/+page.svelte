@@ -26,9 +26,10 @@
 			<Select
 				options={competitionOptions}
 				placeholder='Select a competition'
+				hasSearch
 			/>
 		</div>
 	</Header>
 
-	<div class="px-3 py-2">Rest of the page</div>
+	<div class="px-3 py-2"></div>
 </Page>

@@ -14,12 +14,17 @@
 	export let hasError = false
 	export let placeholder = 'Select an option'
 	export let options: Array<Option>
+	export let hasSearch = false
 
 	let selectedOption: Option
 	let selectDropdown: SvelteComponent
+
+	function handleSelect(e: CustomEvent<Option>) {
+		selectedOption = e.detail
+	}
 </script>
 
-<SelectDropdown bind:this={selectDropdown} {options} bind:selectedOption />
+<SelectDropdown bind:this={selectDropdown} {options} bind:selectedOption on:select={handleSelect} {hasSearch} />
 
 <button
 	class="grid h-12 w-full grid-cols-[1fr_24px] rounded border bg-white px-2.5 py-3 text-left text-base text-neutral-600 outline-none"

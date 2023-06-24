@@ -5,6 +5,7 @@
 	import IconLogout from '$lib/assets/icon-logout-crimson.svg'
 	import IconEvent from '$lib/assets/icon-event-crimson.svg'
 	import IconSession from '$lib/assets/icon-session-crimson.svg'
+	import IconUsers from '$lib/assets/icon-users-crimson.svg'
 	import { goto } from '$app/navigation'
 	import { ROUTES } from '$lib/utils/constants/routes'
 	import { page } from '$app/stores'
@@ -23,6 +24,12 @@
 			alt: 'Icon session',
 			route: ROUTES.SESSIONS,
 			label: 'Sessions',
+		},
+		{
+			icon: IconUsers,
+			alt: 'Icon judges',
+			route: ROUTES.JUDGES,
+			label: 'Judges',
 		},
 		{
 			icon: IconLogout,

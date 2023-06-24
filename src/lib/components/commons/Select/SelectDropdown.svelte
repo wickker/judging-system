@@ -1,15 +1,33 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal'
+	import { createEventDispatcher } from 'svelte'
 	import { fade, slide } from 'svelte/transition'
 	import type { Option } from './Select.svelte'
 	import IconTick from '$lib/assets/icon-tick-crimson.svg'
+	import IconSearch from '$lib/assets/icon-search-crimson.svg'
+	import IconCross from '$lib/assets/icon-cross-indigo.svg'
+	import { InputText } from '$lib/components/commons'
+	import useDebounce from '$lib/hooks/useDebounce'
 
 	export let options: Array<Option>
 	export let selectedOption: Option
+	export let hasSearch = false
 
 	let isVisible = false
+	let searchRef: HTMLInputElement
+	let filteredOptions = options
+	let dropdownHeight: number
+	let windowHeight: number
+
+	const dispatch = createEventDispatcher<{ select: Option }>()
+	const { debounce } = useDebounce()
+
+	$: if (searchRef && isVisible) {
+		searchRef.focus()
+	}
 
 	export function handleOpen() {
+		filteredOptions = options
 		isVisible = true
 	}
 
@@ -20,10 +38,22 @@
 	function handleSelect<T>(e: MouseEvent, label: string, value: T, isSelected: boolean) {
 		e.stopPropagation()
 		if (isSelected) return
-		selectedOption = { label, value }
+		dispatch('select', { label, value })
 		handleClose()
 	}
+
+	function handleSearch() {
+		debounce(function () {
+			if (searchRef.value) {
+				filteredOptions = options.filter((o) => o.label.includes(searchRef.value))
+			} else {
+				filteredOptions = options
+			}
+		})
+	}
 </script>
+
+<svelte:window bind:outerHeight={windowHeight} />
 
 {#if isVisible}
 	<div
@@ -34,29 +64,58 @@
 	>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div
-			class="relative flex h-full w-full max-w-lg flex-col justify-center overflow-hidden bg-black bg-opacity-50"
+			class="relative flex h-full w-full max-w-lg flex-col justify-center bg-black bg-opacity-50"
 			on:click={handleClose}
 		>
+		<!-- Dropdown -->
 			<div
-				class="absolute bottom-0 w-full rounded-t-2xl bg-white py-10"
-				transition:slide={{ axis: 'y', duration: 250 }}
+				class="absolute bottom-0 flex max-h-[100vh] w-full flex-col overflow-hidden bg-white py-10"
+				class:rounded-t-2xl={dropdownHeight && windowHeight && dropdownHeight < windowHeight}
+				in:slide={{ axis: 'y', duration: 250 }}
+				out:fade={{ duration: 250 }}
 				on:click={(e) => e.stopPropagation()}
+				bind:offsetHeight={dropdownHeight}
 			>
-				<div class="max-h-[80vh] overflow-y-auto px-3">
-					{#each options as { label, value } (value)}
-						{@const isSelected = selectedOption?.value === value}
-						<button
-							class="flex w-full justify-between border-b border-b-zinc-200 py-2 text-dark-indigo"
-							on:click={(e) => handleSelect(e, label, value, isSelected)}
-						>
-							<p class:font-semibold={isSelected}>{label}</p>
-
-							{#if isSelected}
-								<img src={IconTick} alt="Icon tick" class="h-6 w-6" />
-							{/if}
-						</button>
-					{/each}
+				<!-- Close button -->
+				<div class="pb-3 pl-3">
+					<button on:click={handleClose}>
+						<img src={IconCross} alt="Icon cross" class="h-6 w-6" />
+					</button>
 				</div>
+
+				<!-- Filtered options -->
+				<div class="flex flex-col overflow-y-auto px-3">
+					{#if filteredOptions.length > 0}
+						{#each filteredOptions as { label, value } (value)}
+							{@const isSelected = selectedOption?.value === value}
+
+							<button
+								class="flex w-full justify-between border-b border-b-zinc-200 py-2 text-dark-indigo"
+								on:click={(e) => handleSelect(e, label, value, isSelected)}
+							>
+								<p class:font-semibold={isSelected}>{label}</p>
+
+								{#if isSelected}
+									<img src={IconTick} alt="Icon tick" class="h-6 w-6" />
+								{/if}
+							</button>
+						{/each}
+					{:else}
+						<p class="pb-3 text-center text-zinc-500">No data</p>
+					{/if}
+				</div>
+
+				<!-- Search input -->
+				{#if hasSearch}
+					<div class="px-3 pt-5">
+						<InputText
+							leftIcon={IconSearch}
+							placeholder="Search"
+							bind:ref={searchRef}
+							on:input={handleSearch}
+						/>
+					</div>
+				{/if}
 			</div>
 		</div>
 	</div>
