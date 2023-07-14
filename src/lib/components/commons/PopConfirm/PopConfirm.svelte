@@ -60,13 +60,16 @@
 				{#if title}
 					<p class="mb-1 text-center text-xl text-dark-indigo">{title}</p>
 				{/if}
+				
 				{#if description}
 					<p class="text-center text-sm text-zinc-600">
 						{description}
 					</p>
 				{/if}
+
 				<div class="mt-12" />
 				<Button isBlock on:click={handleConfirm} {isLoading}>Ok</Button>
+
 				<div class="m-1" />
 				<Button isBlock color="indigo" on:click={handleClosePopConfirm}>Cancel</Button>
 			</div>
