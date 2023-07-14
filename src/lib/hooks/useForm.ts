@@ -1,6 +1,7 @@
 import { get, writable } from 'svelte/store'
 import type { ZodIssue, z } from 'zod'
 import { useNotification } from '$lib/hooks/useNotification'
+import type { Error } from '$lib/types/commons'
 
 type UseFormProps<T, K> = {
 	schema: z.Schema<T>
@@ -108,9 +109,9 @@ export const useForm = <T extends object, K>({
 		const response = await submitRequest(parsed.data)
 
 		if (response.status >= 400) {
-			const errorMessage = await response.json()
+			const error = await response.json() as Error
 			notification.create({
-				message: errorMessage,
+				message: error.message,
 				type: 'error',
 			})
 			errorCB?.()

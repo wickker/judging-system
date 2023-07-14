@@ -1,11 +1,18 @@
 <script lang="ts">
+	import AddJudgeModal from '$lib/components/Judges/AddJudgeModal/AddJudgeModal.svelte'
 	import { Header, ButtonCircularPlus, Page } from '$lib/components/commons'
+
+	let isAddModalVisible = false
+
+	function handleOpenAddModal() {
+		isAddModalVisible = true
+	}
 </script>
 
 <Page>
 	<Header title="Judges" slot="header">
 		<div class="fixed bottom-0 flex w-full max-w-lg justify-end px-3 py-5">
-			<ButtonCircularPlus />
+			<ButtonCircularPlus on:click={handleOpenAddModal} />
 		</div>
 	</Header>
 
@@ -25,3 +32,5 @@
 		{/each} -->
 	</div>
 </Page>
+
+<AddJudgeModal bind:isVisible={isAddModalVisible} />

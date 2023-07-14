@@ -10,6 +10,7 @@ export const ROUTES = {
 		GOOGLE_AUTH: '/api/google-auth',
 		LOGOUT: '/api/logout',
 		COMPETITIONS: '/api/competitions',
+		JUDGES: '/api/judges',
 		REGISTER: '/api/register',
 		LOGIN_ADMIN: '/api/login-admin',
 	},

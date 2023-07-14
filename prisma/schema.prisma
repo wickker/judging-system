@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-   previewFeatures = ["filteredRelationCount"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["filteredRelationCount"]
 }
 
 datasource db {
@@ -22,6 +22,7 @@ model User {
   updatedAt         DateTime?     @updatedAt
   deletedAt         DateTime?
   Competition       Competition[]
+  Judge             Judge[]
 }
 
 model Judge {
@@ -34,6 +35,10 @@ model Judge {
   updatedAt     DateTime?      @updatedAt
   deletedAt     DateTime?
   sessionJudges SessionJudge[]
+  user          User           @relation(fields: [userId], references: [id])
+  userId        Int
+
+  @@index([userId])
 }
 
 model Competition {
