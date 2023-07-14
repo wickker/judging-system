@@ -113,13 +113,13 @@ export const useForm = <T extends object, K>({
 				message: errorMessage,
 				type: 'error',
 			})
-			errorCB && errorCB()
+			errorCB?.()
 			isLoading.set(false)
 			return
 		}
 
 		const data = await response.json()
-		successCB && successCB(data)
+		successCB?.(data)
 		isLoading.set(false)
 		resetForm()
 	}
