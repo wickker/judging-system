@@ -5,7 +5,6 @@ import useJudgeDto from '$lib/dtos/judges'
 const judgeDto = useJudgeDto(db)
 
 export const load: PageServerLoad = async ({ locals }) => {
-  
-	// const competitions = await competitionDto.findAllByUser(locals.user.id)
-	// return { competitions }
+  const judges = await judgeDto.findAllByUser(locals.user.id)
+  return { judges }
 }

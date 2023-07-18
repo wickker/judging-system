@@ -1,34 +1,37 @@
 <script lang="ts">
-  import type { Judge } from '@prisma/client'
+	import type { Judge } from '@prisma/client'
 	import { Modal, Button } from '$lib/components/commons'
-	import { CreateJudgeFormSchema } from '$lib/types/judge'
+	import { CreateJudgeFormSchema, type GetJudgeRes } from '$lib/types/judge'
 	import { useForm } from '$lib/hooks/useForm'
 	import { DEFAULT_FORM_VALUES } from '$lib/utils/constants/defaults'
 	import { ROUTES } from '$lib/utils/constants/routes'
-	import JudgeForm from '../JudgeForm/JudgeForm.svelte'
+	import { JudgeForm } from '$lib/components/Judges'
 
-  export let isVisible = false
+	export let isVisible = false
+	export let judges: Array<GetJudgeRes>
 
-  const { form, refs, errors, onSubmit, isLoading } = useForm({
+	const { form, refs, errors, onSubmit, isLoading } = useForm({
 		schema: CreateJudgeFormSchema,
 		defaultValues: DEFAULT_FORM_VALUES.JUDGE_FORM,
 		route: ROUTES.API.JUDGES,
 		successCB: createJudgeSuccessCB,
 	})
 
-  function handleCloseModal() {
+	function handleCloseModal() {
 		isVisible = false
 	}
 
-  function createJudgeSuccessCB(data?: Judge) {
-    console.log('created judge : ', data)
-  }
+	function createJudgeSuccessCB(data?: Judge) {
+		if (!data) return
+		judges = [{ name: data.name, id: data.id, email: data.email }, ...judges]
+		handleCloseModal()
+	}
 </script>
 
 <Modal bind:isVisible title="Add New Judge">
 	<!-- Content -->
 	<div class="mt-2 px-4">
-    <JudgeForm {form} {refs} errors={$errors} />
+		<JudgeForm {form} {refs} errors={$errors} />
 	</div>
 
 	<!-- Footer -->

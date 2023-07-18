@@ -16,7 +16,7 @@ export const DELETE: RequestHandler = async ({ request }) => {
 
 	if (!res.success) {
 		logger.error(
-			`Unable to zod parse update competition data : ${JSON.stringify(res.error.errors)}`
+			`Unable to zod parse delete competition data : ${JSON.stringify(res.error.errors)}`
 		)
 		throw error(400, { message: JSON.stringify(res.error) })
 	}

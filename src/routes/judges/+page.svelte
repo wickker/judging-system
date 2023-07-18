@@ -1,11 +1,22 @@
 <script lang="ts">
-	import AddJudgeModal from '$lib/components/Judges/AddJudgeModal/AddJudgeModal.svelte'
+	import { JudgeTile, AddJudgeModal, EditJudgeModal } from '$lib/components/Judges'
 	import { Header, ButtonCircularPlus, Page } from '$lib/components/commons'
+	import type { GetJudgeRes } from '$lib/types/judge.js'
+
+	export let data
 
 	let isAddModalVisible = false
+	let isEditModalVisible = false
+	let judges = data.judges
+	let selectedJudge: GetJudgeRes
 
 	function handleOpenAddModal() {
 		isAddModalVisible = true
+	}
+
+	function handleClickEdit(j: GetJudgeRes) {
+		selectedJudge = j
+		isEditModalVisible = true
 	}
 </script>
 
@@ -17,20 +28,14 @@
 	</Header>
 
 	<div class="overflow-y-auto px-3 py-2">
-		<!-- {#each competitions as { id, name, year, _count } (id)}
-			<CompetitionTile
-				bind:name
-				bind:year
-				bind:count={_count.sessions}
-				onEdit={() =>
-					handleClickEdit({
-						id,
-						name,
-						year,
-					})}
-			/>
-		{/each} -->
+		{#each judges as { id, name, email } (id)}
+			<JudgeTile bind:name bind:email onEdit={() => handleClickEdit({ id, name, email })} />
+		{/each}
 	</div>
 </Page>
 
-<AddJudgeModal bind:isVisible={isAddModalVisible} />
+<AddJudgeModal bind:isVisible={isAddModalVisible} bind:judges />
+
+{#if isEditModalVisible}
+	<EditJudgeModal bind:isVisible={isEditModalVisible} judge={selectedJudge} bind:judges />
+{/if}
