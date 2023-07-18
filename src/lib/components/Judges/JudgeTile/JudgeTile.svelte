@@ -2,7 +2,7 @@
 	import IconEdit from '$lib/assets/icon-edit-zinc.svg'
 
 	export let name = ''
-  export let email = ''
+	export let email = ''
 	export let onEdit: () => void
 </script>
 

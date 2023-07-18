@@ -11,9 +11,7 @@ export const DELETE: RequestHandler = async ({ request }) => {
 	const res = DeleteJudgeSchema.safeParse(data)
 
 	if (!res.success) {
-		logger.error(
-			`Unable to zod parse delete judge data : ${JSON.stringify(res.error.errors)}`
-		)
+		logger.error(`Unable to zod parse delete judge data : ${JSON.stringify(res.error.errors)}`)
 		throw error(400, { message: JSON.stringify(res.error) })
 	}
 
@@ -27,9 +25,7 @@ export const PUT: RequestHandler = async ({ request }) => {
 	const res = UpdateJudgeFormSchema.safeParse(data)
 
 	if (!res.success) {
-		logger.error(
-			`Unable to zod parse update judge data : ${JSON.stringify(res.error.errors)}`
-		)
+		logger.error(`Unable to zod parse update judge data : ${JSON.stringify(res.error.errors)}`)
 		throw error(400, { message: JSON.stringify(res.error) })
 	}
 

@@ -12,5 +12,5 @@ export const DEFAULT_FORM_VALUES = {
 	JUDGE_FORM: {
 		name: '',
 		email: '',
-	}
+	},
 } as const

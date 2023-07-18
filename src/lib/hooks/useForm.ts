@@ -109,7 +109,7 @@ export const useForm = <T extends object, K>({
 		const response = await submitRequest(parsed.data)
 
 		if (response.status >= 400) {
-			const error = await response.json() as Error
+			const error = (await response.json()) as Error
 			notification.create({
 				message: error.message,
 				type: 'error',

@@ -60,7 +60,7 @@
 				{#if title}
 					<p class="mb-1 text-center text-xl text-dark-indigo">{title}</p>
 				{/if}
-				
+
 				{#if description}
 					<p class="text-center text-sm text-zinc-600">
 						{description}
