@@ -2,8 +2,7 @@
 	import { fade } from 'svelte/transition'
 	import IconHamburger from '$lib/assets/icon-hamburger-crimson.svg'
 	import IconSearch from '$lib/assets/icon-search-crimson.svg'
-	import IconCross from '$lib/assets/icon-cross-crimson.svg'
-	import { InputText, Menu } from '$lib/components/commons'
+	import { InputText, Menu, Icons } from '$lib/components/commons'
 
 	export let hasSearch = false
 	export let searchPlaceholder = ''
@@ -43,7 +42,7 @@
 				on:click={handleClickCross}
 				in:fade={{ duration: 250 }}
 			>
-				<img src={IconCross} alt="Icon cross" class="h-8 w-8" />
+				<Icons.Cross class="h-8 w-8 text-crimson"/>
 			</button>
 		{:else}
 			<button

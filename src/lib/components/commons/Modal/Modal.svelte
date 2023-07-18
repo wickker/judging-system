@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { portal } from 'svelte-portal'
 	import { fade } from 'svelte/transition'
-	import IconCross from '$lib/assets/icon-cross-indigo.svg'
+	import { Icons } from '$lib/components/commons'
 
 	export let isVisible = false
 	export let title = ''
@@ -19,7 +19,7 @@
 	>
 		<div class="relative h-full w-full max-w-lg bg-white">
 			<button class="my-5 ml-3 transition-transform active:scale-90" on:click={handleCloseModal}>
-				<img src={IconCross} alt="Icon cross" class="h-8 w-8" />
+				<Icons.Cross class="h-8 w-8 text-dark-indigo" />
 			</button>
 
 			{#if $$slots.titleSlot}

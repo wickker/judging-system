@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { useNotification } from '$lib/hooks/useNotification'
 	import { slide } from 'svelte/transition'
-	import IconCross from '$lib/assets/icon-cross-white.svg'
+	import { Icons } from '$lib/components/commons'
 	import IconSuccess from '$lib/assets/icon-success-white.svg'
 	import IconError from '$lib/assets/icon-error-white.svg'
 
@@ -26,7 +26,7 @@
 			</div>
 
 			<button class="transition-transform active:scale-90" on:click={() => remove(uuid)}>
-				<img src={IconCross} alt="Icon cross" class="h-6 w-6" />
+				<Icons.Cross class="h-6 w-6 text-white" />
 			</button>
 		</div>
 	{/each}

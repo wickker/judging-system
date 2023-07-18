@@ -5,8 +5,7 @@
 	import type { Option } from './Select.svelte'
 	import SelectOption from './SelectOption.svelte'
 	import IconSearch from '$lib/assets/icon-search-crimson.svg'
-	import IconCross from '$lib/assets/icon-cross-indigo.svg'
-	import { InputText } from '$lib/components/commons'
+	import { InputText, Icons } from '$lib/components/commons'
 	import useDebounce from '$lib/hooks/useDebounce'
 
 	export let options: Array<Option>
@@ -79,7 +78,7 @@
 				<!-- Close button -->
 				<div class="pb-3 pl-3">
 					<button on:click={handleClose}>
-						<img src={IconCross} alt="Icon cross" class="h-6 w-6" />
+						<Icons.Cross class="h-6 w-6 text-dark-indigo" />
 					</button>
 				</div>
 
