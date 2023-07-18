@@ -5,7 +5,6 @@ import useCompetitionDto from '$lib/dtos/competitions'
 const competitionDto = useCompetitionDto(db)
 
 export const load: PageServerLoad = async ({ locals }) => {
-	console.log(locals)
 	const competitions = await competitionDto.findAllByUser(locals.user.id)
 	return { competitions }
 }

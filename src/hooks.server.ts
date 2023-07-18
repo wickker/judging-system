@@ -23,19 +23,6 @@ export const handle: Handle = async ({ event, resolve }) => {
 	}
 
 	if (!clientToken) {
-		// case: route requires auth, no valid cookie token and google login / sign in
-		const token = event.url.searchParams.get('token')
-		if (event.url.pathname === ROUTES.SESSIONS && token) {
-			const user = await userDto.clientTokenExists(token)
-			if (!user) {
-				throw error(400, {
-					message: 'Failed to authenticate user via google',
-				})
-			}
-			event.locals.user = user
-			return await resolve(event)
-		}
-
 		// case: route requries auth but no valid cookie token hence redirect to login
 		return new Response('Redirect', { status: 303, headers: { location: ROUTES.HOME } })
 	}
