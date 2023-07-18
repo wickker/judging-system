@@ -6,7 +6,7 @@
 	import { DEFAULT_FORM_VALUES } from '$lib/utils/constants/defaults'
 	import { ROUTES } from '$lib/utils/constants/routes'
 	import { useForm } from '$lib/hooks/useForm'
-	import type { ButtonColor } from '$lib/components/commons/Button/Button.svelte'
+	import type { ButtonColor } from '$lib/components/commons/Buttons/Button.svelte'
 
 	export let buttonText = ''
 	export let route = ''

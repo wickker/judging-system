@@ -6,9 +6,9 @@
 </script>
 
 <script lang="ts">
-	import IconChevron from '$lib/assets/icon-chevron-neutral.svg'
 	import type { SvelteComponent } from 'svelte'
 	import SelectDropdown from './SelectDropdown.svelte'
+	import { Icons } from '$lib/components/commons'
 
 	export let isDisabled = false
 	export let hasError = false
@@ -42,5 +42,5 @@
 	on:click={selectDropdown.handleOpen}
 >
 	{selectedOption?.label || placeholder}
-	<img src={IconChevron} alt="Icon chevron" class="h-6 w-6 rotate-180" />
+	<Icons.Chevron class="h-6 w-6 rotate-180 text-neutral-400" />
 </button>
