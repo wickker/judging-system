@@ -53,7 +53,7 @@
 	}
 </script>
 
-<svelte:window bind:outerHeight={windowHeight} />
+<svelte:window bind:innerHeight={windowHeight} />
 
 {#if isVisible}
 	<div

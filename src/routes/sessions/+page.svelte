@@ -1,9 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte'
-	import { goto } from '$app/navigation'
-	import { page } from '$app/stores'
 	import { Header, Page, Select } from '$lib/components/commons'
-	import { ROUTES } from '$lib/utils/constants/routes'
 
 	export let data
 
@@ -11,13 +7,6 @@
 		label: `${c.name} (${c.year})`,
 		value: c.id,
 	}))
-
-	onMount(function () {
-		// handle google login
-		if ($page.url.searchParams.get('token')) {
-			goto(ROUTES.SESSIONS)
-		}
-	})
 </script>
 
 <Page>

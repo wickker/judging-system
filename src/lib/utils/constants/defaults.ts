@@ -9,4 +9,8 @@ export const DEFAULT_FORM_VALUES = {
 		name: '',
 		year: DateTime.local().year,
 	},
+	JUDGE_FORM: {
+		name: '',
+		email: '',
+	},
 } as const

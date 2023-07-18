@@ -12,40 +12,25 @@ export const handle: Handle = async ({ event, resolve }) => {
 	const clientToken = event.cookies.get(COOKIES.ADMIN)
 
 	if (ROUTES_NO_AUTH.includes(event.url.pathname)) {
+		// case: route does not require auth, cookie token is valid hence redirect to sessions
 		if (clientToken && ROUTES_REDIRECT_ON_AUTH.includes(event.url.pathname)) {
-			event = await injectUser(clientToken, event)
+			await injectUser(clientToken, event)
 			return new Response('Redirect', { status: 303, headers: { location: ROUTES.SESSIONS } })
 		}
+
+		// case: route does not require auth and no valid cookie token
 		return await resolve(event)
 	}
 
 	if (!clientToken) {
-		// handle google login
-		if (event.url.pathname === ROUTES.SESSIONS && event.url.searchParams.get('token')) {
-			const isSuccess = await handleGoogleLogin(event)
-			if (!isSuccess) {
-				throw error(400, {
-					message: 'Failed to authenticate user via google',
-				})
-			}
-			return await resolve(event)
-		}
+		// case: route requries auth but no valid cookie token hence redirect to login
 		return new Response('Redirect', { status: 303, headers: { location: ROUTES.HOME } })
 	}
 
+	// case: route requires auth and there is a valid cookie token
 	event = await injectUser(clientToken, event)
 
 	return await resolve(event)
-}
-
-const handleGoogleLogin = async (
-	event: RequestEvent<Partial<Record<string, string>>, string | null>
-) => {
-	const token = event.url.searchParams.get('token')
-	if (!token) return false
-	const exists = await userDto.clientTokenExists(token)
-	if (!exists) return false
-	return true
 }
 
 const injectUser = async (

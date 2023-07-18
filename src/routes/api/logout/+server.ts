@@ -3,7 +3,6 @@ import { COOKIES } from '$lib/utils/constants/clientStorage'
 import { ROUTES } from '$lib/utils/constants/routes'
 import useUserDto from '$lib/dtos/users'
 import db from '$lib/db/database'
-import type { User } from '@prisma/client'
 
 const userDto = useUserDto(db)
 
@@ -14,7 +13,7 @@ export const GET: RequestHandler = async ({ cookies, locals }) => {
 	})
 
 	if ('user' in locals) {
-		await userDto.expireClientToken((locals.user as User).email)
+		await userDto.expireClientToken(locals.user.email)
 	}
 
 	throw redirect(302, ROUTES.HOME)
