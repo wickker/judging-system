@@ -3,6 +3,8 @@
 	import Logo from '$lib/assets/logo.svg'
 	import { Button } from '$lib/components/commons'
 	import { ROUTES } from '$lib/utils/constants/routes'
+
+	$: console.log('hello')
 </script>
 
 <div class="relative flex h-full flex-row items-center justify-center bg-dark-indigo">
